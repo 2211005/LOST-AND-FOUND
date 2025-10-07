@@ -1,0 +1,76 @@
+/* homepage.component.css */
+
+/* :host se refiere al elemento <app-homepage> */
+:host {
+  /* Hacemos que el componente se comporte como un bloque flexible */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+  align-items: center;   /* Centra el contenido horizontalmente */
+  
+  /* Importante: En lugar de usar una altura fija, le decimos que ocupe el espacio disponible.
+     El control de la altura total lo llevará el app.component */
+  flex-grow: 1; 
+  padding: 40px 20px; /* Añadimos un poco de espacio por si la pantalla es pequeña */
+  background-color: #f4f7f6;
+}
+
+/* El resto de los estilos se mantienen casi igual, pero están encapsulados
+   dentro de este componente y no afectarán a la navbar o al footer. */
+
+.home-container {
+    max-width: 600px;
+    width: 100%; /* Asegura que no se desborde en pantallas pequeñas */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+    color: #005A9C;
+    font-size: 2.5em;
+    margin-top: 0; /* Quitamos margen superior para mejor alineación */
+    margin-bottom: 20px;
+}
+
+.home-text p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.home-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

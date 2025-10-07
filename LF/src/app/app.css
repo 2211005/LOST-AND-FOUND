@@ -1,0 +1,22 @@
+/* app.component.css o styles.css */
+
+.app-container {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en una columna (navbar, main, footer) */
+    min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la pantalla */
+}
+
+.main-content {
+  flex-grow: 1; /* ¡Esta es la clave! Hace que el contenido principal crezca y empuje el footer hacia abajo */
+  display: flex; /* Para que el contenido dentro de main (app-homepage) pueda usar flexbox */
+  flex-direction: column;
+}
+
+/* Opcional: Estilos básicos para asegurar que el router-outlet o el componente inyectado ocupe el espacio */
+.main-content > router-outlet + * {
+  flex-grow: 1;
+}
+
+.main-content > app-homepage {
+  flex-grow: 1;
+}
