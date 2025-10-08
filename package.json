@@ -1,0 +1,16 @@
+{
+  "name": "integradora",
+  "version": "1.0.0",
+  "description": "Este es un repositiorio de para el proyecto Lost &amp; Found",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently -n \"BACK,FRONT\" -c \"green,blue\" \"cd LF_BACK && npm run dev\" \"cd LF && ng serve --proxy-config proxy.conf.json\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

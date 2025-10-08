@@ -1,0 +1,34 @@
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+*.tmp
+*.bak
+*.swp
+~$*
+.env
+*.env
+
+# Raíz (concurrently)
+node_modules/
+dist/
+build/
+tmp/
+out/
+
+# Angular (LF)
+LF/node_modules/
+LF/dist/
+LF/.angular/
+LF/.env
+
+# Backend (LF_BACK)
+LF_BACK/node_modules/
+LF_BACK/dist/
+LF_BACK/.env
+
+# Tests / coverage
+coverage/
+.nyc_output/
+*.lcov
