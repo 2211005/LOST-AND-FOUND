@@ -1,0 +1,96 @@
+<h1>Publicaciones</h1>
+
+<div class="toolbar">
+  <!-- signals: one-way + change -->
+  <input [ngModel]="q()" (ngModelChange)="q.set($event)" placeholder="Buscar por título o descripción">
+
+  <select [ngModel]="type()" (ngModelChange)="type.set($event)">
+    <option value="">Tipo (todos)</option>
+    <option value="lost">Perdido</option>
+    <option value="found">Encontrado</option>
+  </select>
+
+  <label>
+    <input type="checkbox" [ngModel]="mineOnly()" (ngModelChange)="mineOnly.set($event)">
+    Solo mis publicaciones
+  </label>
+
+  <select [ngModel]="pageSize()" (ngModelChange)="setPageSize($event)">
+    <option [ngValue]="5">5 por página</option>
+    <option [ngValue]="10">10 por página</option>
+    <option [ngValue]="20">20 por página</option>
+  </select>
+
+  <div class="view-toggle">
+    <button [class.active]="view()==='feed'" class="page-btn" (click)="setView('feed')">Feed</button>
+    <button [class.active]="view()==='grid'" class="page-btn" (click)="setView('grid')">Grid</button>
+  </div>
+</div>
+
+<!-- FEED -->
+<ul *ngIf="view()==='feed'" class="feed">
+  @for (p of paged(); track p.id) {
+    <li class="post">
+      <div class="post-header">
+        <img class="avatar" [src]="p.userAvatarUrl" alt="avatar" loading="lazy">
+        <div class="meta">
+          <div class="name">
+            {{p.userName || 'Usuario'}}
+            <span class="pill" [class.lost]="p.type==='lost'" [class.found]="p.type==='found'">
+              {{ p.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+            </span>
+          </div>
+          <div class="time">{{ p.createdAt | date:'medium' }}</div>
+        </div>
+      </div>
+
+      @if (p.imageUrl) {
+        <img class="post-img" [src]="p.imageUrl" alt="imagen" loading="lazy">
+      }
+
+      <div class="post-body">
+        <div class="post-title">{{p.title}}</div>
+        <p class="post-text">{{p.description}}</p>
+        <div class="tags">{{p.location}}</div>
+      </div>
+
+      <div class="actions">
+        <button class="action-btn">Me gusta</button>
+        <button class="action-btn">Comentar</button>
+        <button class="action-btn">Compartir</button>
+      </div>
+    </li>
+  } @empty {
+    <p>No hay publicaciones.</p>
+  }
+</ul>
+
+<!-- GRID -->
+<ul *ngIf="view()==='grid'" class="grid">
+  @for (p of paged(); track p.id) {
+    <li class="card">
+      <h3>
+        {{p.title}}
+        <span class="pill" [class.lost]="p.type==='lost'" [class.found]="p.type==='found'">
+          {{ p.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+        </span>
+      </h3>
+      <p class="muted">{{p.location}} · {{ p.createdAt | date:'short' }}</p>
+      <p>{{p.description}}</p>
+    </li>
+  } @empty {
+    <p>No hay publicaciones.</p>
+  }
+</ul>
+
+<!-- Paginación -->
+<div class="pagination">
+  <button class="page-btn" (click)="prevPage()" [disabled]="page()===1">«</button>
+
+  <!-- Usa pageNumbers() que definimos en el .ts -->
+  @for (i of pageNumbers(); track i) {
+    <button class="page-btn" [class.active]="i===page()" (click)="setPage(i)">{{ i }}</button>
+  }
+
+  <button class="page-btn" (click)="nextPage()" [disabled]="page()===totalPages()">»</button>
+</div>

@@ -1,62 +1,11 @@
-<div class="form-container">
-  
-  <h2>Crear un Reporte de Objeto Perdido</h2>
-  <p>Por favor, completa los siguientes campos con la mayor cantidad de detalles posible.</p>
+<h2>Centro de Reportes</h2>
 
-  <form>
-    <div class="form-group">
-      <label for="reporte-titulo">¿Qué perdiste? (Título breve)</label>
-      <input type="text" id="reporte-titulo" name="reporte-titulo" placeholder="Ej: Mochila negra marca Jansport" required>
-    </div>
-
-    <div class="form-group">
-      <label for="reporte-descripcion">Descripción detallada</label>
-      <textarea id="reporte-descripcion" name="reporte-descripcion" rows="4" placeholder="Describe el objeto, su contenido, marcas distintivas, etc."></textarea>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="reporte-ubicacion">¿Dónde lo perdiste?</label>
-        <input type="text" id="reporte-ubicacion" name="reporte-ubicacion" placeholder="Ej: Biblioteca, edificio A, 3er piso" required>
-      </div>
-      <div class="form-group">
-        <label for="reporte-fecha">¿Cuándo lo perdiste?</label>
-        <input type="date" id="reporte-fecha" name="reporte-fecha" required>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="reporte-categoria">Categoría del objeto</label>
-      <select id="reporte-categoria" name="reporte-categoria">
-        <option value="">-- Elige una categoría --</option>
-        <option value="electronica">Electrónica (teléfonos, laptops)</option>
-        <option value="ropa">Ropa y Accesorios</option>
-        <option value="documentos">Documentos (identificaciones, tarjetas)</option>
-        <option value="libros">Libros y Cuadernos</option>
-        <option value="otros">Otros</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-        <label for="reporte-foto">Sube una foto (Opcional)</label>
-        <input type="file" id="reporte-foto" name="reporte-foto" accept="image/*">
-    </div>
-
-    <hr class="form-divider">
-
-    <div class="form-group">
-        <label for="contacto-nombre">Tu nombre</label>
-        <input type="text" id="contacto-nombre" name="contacto-nombre" placeholder="Nombre Apellido" required>
-    </div>
-    <div class="form-group">
-        <label for="contacto-email">Correo electrónico de contacto</label>
-        <input type="email" id="contacto-email" name="contacto-email" placeholder="tu-correo@ejemplo.com" required>
-    </div>
-
-
-    <div class="form-actions">
-      <button type="submit" class="submit-button">Enviar Reporte</button>
-    </div>
-
-  </form>
+<div class="tabs">
+  <button class="{{ vista === 'perdido' ? 'active' : '' }}" (click)="vista='perdido'">Objeto perdido</button>
+  <button class="{{ vista === 'encontrado' ? 'active' : '' }}" (click)="vista='encontrado'">Objeto encontrado</button>
 </div>
+
+<section class="panel">
+  <app-perdido-form *ngIf="vista==='perdido'"></app-perdido-form>
+  <app-encontrado-form *ngIf="vista==='encontrado'"></app-encontrado-form>
+</section>
