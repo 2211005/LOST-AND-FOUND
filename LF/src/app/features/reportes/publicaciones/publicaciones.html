@@ -1,0 +1,128 @@
+<h2 class="page-title">Publicaciones recientes</h2>
+<p class="page-subtitle">
+  Aquí puedes ver los objetos reportados como perdidos o encontrados.
+</p>
+
+<!-- Buscador -->
+<div class="pub-search">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchTermChange()"
+    placeholder="Buscar por título, lugar o categoría..."
+  />
+</div>
+
+<div *ngIf="loading()">Cargando publicaciones...</div>
+
+<div *ngIf="!loading() && error()" class="pub-error">
+  {{ error() }}
+</div>
+
+<!-- Resumen -->
+<div
+  class="pub-summary"
+  *ngIf="!loading() && !error() && totalItems > 0"
+>
+  Mostrando <strong>{{ paginatedReports.length }}</strong> de
+  <strong>{{ totalItems }}</strong> publicaciones
+  (página {{ currentPage }} de {{ totalPages }})
+</div>
+
+<!-- Sin resultados -->
+<div
+  *ngIf="!loading() && !error() && totalItems === 0"
+>
+  No hay publicaciones que coincidan con tu búsqueda.
+</div>
+
+<!-- Grid de cards -->
+<div
+  class="pub-grid"
+  *ngIf="!loading() && !error() && totalItems > 0"
+>
+  <article class="pub-card" *ngFor="let r of paginatedReports">
+
+    <div
+    class="pub-delivered-pill"
+    *ngIf="(r.status || 'Nuevo') === 'Entregado'"
+  >
+    Entregado
+  </div>
+
+    <div class="pub-header">
+      <span class="pub-type" [ngClass]="r.type">
+        {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+      </span>
+      <span class="pub-category">{{ r.category | titlecase }}</span>
+    </div>
+
+    <h3 class="pub-title">{{ r.title }}</h3>
+    <p class="pub-description">
+      {{ r.description }}
+    </p>
+
+    <div class="pub-meta">
+      <div>
+        <span class="label">Lugar:</span>
+        <span>{{ r.location }}</span>
+      </div>
+      <div>
+        <span class="label">Fecha:</span>
+        <span>{{ r.date | date: 'shortDate' }}</span>
+      </div>
+      <div>
+        <span class="label">Estado:</span>
+        <span class="pub-status">{{ r.status || 'Nuevo' }}</span>
+      </div>
+    </div>
+
+    <div class="pub-footer">
+      <div class="pub-reporter">
+        <span class="label">Reportante:</span>
+        <span>{{ r.reporterName }}</span>
+      </div>
+      <button
+        class="pub-details-btn"
+        [routerLink]="['/admin/reportes', r._id]"
+        *ngIf="isAdminView"
+      >
+        Ver detalle (admin)
+      </button>
+    </div>
+  </article>
+</div>
+
+<!-- Paginación -->
+<div
+  class="pub-pagination"
+  *ngIf="!loading() && !error() && totalItems > 0 && totalPages > 1"
+>
+  <button
+    class="page-btn"
+    type="button"
+    (click)="prevPage()"
+    [disabled]="currentPage === 1"
+  >
+    Anterior
+  </button>
+
+  <button
+    class="page-btn"
+    type="button"
+    *ngFor="let p of pageNumbers"
+    (click)="goToPage(p)"
+    [class.active]="p === currentPage"
+  >
+    {{ p }}
+  </button>
+
+  <button
+    class="page-btn"
+    type="button"
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPages"
+  >
+    Siguiente
+  </button>
+</div>

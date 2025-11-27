@@ -1,8 +1,0 @@
-.form-container{max-width:800px;margin:auto}
-    .form-group{display:flex;flex-direction:column;gap:.35rem;margin:.5rem 0}
-    .form-row{display:grid;gap:.75rem; grid-template-columns: 1fr 240px}
-    .form-divider{margin:1rem 0}
-    .form-actions{margin-top:1rem}
-    input,select,textarea,button{padding:.55rem; border:1px solid #e5e7eb; border-radius:.5rem}
-    .submit-button{background:#10b981;color:#fff;border:0;cursor:pointer}
-    .submit-button:hover{filter:brightness(.95)}

@@ -1,0 +1,215 @@
+.detalle-wrapper {
+  padding: 0.8rem 0.4rem;
+}
+
+.detalle-header {
+  margin-bottom: 0.9rem;
+}
+
+.page-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.error-text {
+  color: #b91c1c;
+}
+
+.badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+/* layout general */
+.detalle-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .detalle-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* tarjetas */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem 1rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.card-info .descripcion {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.value {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.reporter-box {
+  margin-top: 0.5rem;
+}
+
+.reporter-box h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.reporter-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* Badges (mismas ideas que en el panel) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Tipo */
+.badge-type.lost {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-type.found {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Status */
+.badge-status {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.badge-status.status-nuevo {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-status.status-verificado {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-status.status-espera {
+  background: #fef9c3;
+  color: #92400e;
+}
+
+.badge-status.status-entregado {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-status.status-rechazado {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Entrega */
+.card-entrega .entrega-resumen {
+  font-size: 0.85rem;
+  color: #4b5563;
+  margin-bottom: 0.7rem;
+}
+
+.link-evidencia {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.link-evidencia:hover {
+  text-decoration: underline;
+}
+
+.notas-entrega {
+  margin-top: 0.5rem;
+}
+
+/* Formulario entrega */
+.form-group {
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.form-group input.invalid {
+  border-color: #dc2626;
+}
+
+.field-error {
+  font-size: 0.75rem;
+  color: #b91c1c;
+}
+
+.btn-primary {
+  margin-top: 0.3rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.btn-primary[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}

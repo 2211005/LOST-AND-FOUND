@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HomePageNav } from './home-page/home-page-nav/home-page-nav';
+import { HomePageNav } from './core/home-page-nav/home-page-nav';
 import { RouterOutlet } from '@angular/router';
 
 

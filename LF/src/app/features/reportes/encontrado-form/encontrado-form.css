@@ -1,0 +1,48 @@
+.form-group {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.form-group input.ng-invalid.ng-touched,
+.form-group textarea.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched {
+  border-color: #e53935;
+  background-color: #ffebee;
+}
+
+.error {
+  color: #e53935;
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+.success {
+  color: #2e7d32;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+}
+
+button[type='submit'] {
+  margin-top: 0.5rem;
+  padding: 0.45rem 1.2rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+}
+
+button[type='submit'][disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
