@@ -1,17 +1,18 @@
 /* ===== NAVBAR GENERAL ===== */
 
 .nav-body {
-  position: sticky;           /* se queda arriba al hacer scroll */
+  position: sticky;      /* se queda arriba al hacer scroll */
   top: 0;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.6rem 1.4rem;
-  background: var(--lf-dark);        /* #222831 */
+  padding: 0.6rem 1.8rem;
+  background: var(--lf-dark);  /* #222831 */
   color: #f9fafb;
   border-bottom: 1px solid #020617;
+  box-sizing: border-box;
 }
 
 /* ===== LOGO / NOMBRE ===== */
@@ -24,13 +25,6 @@
   font-size: 1rem;
   text-transform: uppercase;
 }
-
-/* Si luego usas imagen de logo, algo así:
-.nav-logo img {
-  height: 28px;
-  display: block;
-}
-*/
 
 /* ===== ACCIONES ===== */
 
@@ -65,7 +59,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 /* Botón “Hacer un reporte” → turquesa principal */
@@ -98,12 +95,13 @@ button.nav-button {
 
 /* ===== RESPONSIVE ===== */
 
-
+/* Tablet y móviles grandes */
 @media (max-width: 640px) {
   .nav-body {
     flex-direction: column;
     align-items: flex-start;
-    padding: 0.6rem 0.75rem; /* 👈 que coincida con .main-content */
+    padding: 0.7rem 1.2rem;  /* similar a .main-content tablet */
+    gap: 0.5rem;
   }
 
   .nav-actions {
@@ -113,10 +111,30 @@ button.nav-button {
     gap: 0.4rem;
   }
 
-  .nav-button,
-  .nav-link {
+  .nav-link,
+  .nav-button {
     font-size: 0.82rem;
-    padding-inline: 0.7rem;
+    padding: 0.3rem 0.7rem;
   }
 }
 
+/* Móvil chico (Honor / iPhone) */
+@media (max-width: 480px) {
+  .nav-body {
+    padding-inline: 1rem;  /* 👈 igual que .main-content mobile */
+  }
+
+  .nav-logo a {
+    font-size: 0.9rem;
+  }
+
+  .nav-actions {
+    gap: 0.35rem;
+  }
+
+  .nav-link,
+  .nav-button {
+    font-size: 0.8rem;
+    padding-inline: 0.6rem;
+  }
+}

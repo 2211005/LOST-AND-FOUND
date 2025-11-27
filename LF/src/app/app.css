@@ -1,26 +1,30 @@
+/* Layout general de la app */
+
 .app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    180deg,
-    var(--lf-light) 0%,
-    var(--lf-bg) 40%,
-    var(--lf-bg) 100%
-  );
 }
 
 .main-content {
+  flex: 1;
   max-width: 1120px;
-  width: 100%;
   margin: 0 auto;
-  padding: 1.2rem 0.9rem 2rem;
+  width: 100%;
+  padding: 1.5rem 2.5rem;
+  box-sizing: border-box;
 }
 
-@media (max-width: 600px) {
+/* Breakpoints SOLO para el contenedor, no para tipografía */
+
+@media (max-width: 768px) {
   .main-content {
-    max-width: 100%;
-    margin: 0;                       /* sin margen lateral */
-    padding: 0.8rem 0.75rem rem;  /* padding parecido al de la navbar */
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 1rem 1rem;
   }
 }

@@ -1,145 +1,113 @@
-/* ===== CONTENEDOR GENERAL ===== */
-
 .home-container {
+  min-height: calc(100vh - 56px); /* resta aprox. la navbar */
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 64px); /* espacio aproximado para la navbar */
+  padding: 1.6rem 1.4rem;
 }
 
-/* Tarjeta principal */
-.home-hero {
-  max-width: 480px;        /* tope de ancho para que se vea bien en todos */
+.home-card {
   width: 100%;
-  margin: 0 auto;          /* CENTRADO siempre */
+  max-width: 640px;
   background: var(--lf-surface);
   border-radius: 18px;
-  padding: 1.8rem 1.4rem;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--lf-border);
+  padding: 1.6rem 1.7rem 1.4rem;
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.08);
 }
 
-/* ===== TEXTOS ===== */
-
-.home-title {
-  font-size: 1.8rem;
-  font-weight: 800;
+.home-card h1 {
+  margin: 0 0 0.7rem;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: var(--lf-dark-soft);
-  margin: 0 0 0.6rem;
 }
 
-.home-subtitle {
-  font-size: 0.96rem;
-  color: var(--lf-text-muted);
-  line-height: 1.6;
+.home-text {
   margin: 0 0 1.4rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--lf-text-muted);
 }
 
-/* ===== BOTONES ===== */
-
+/* Botones de acción */
 .home-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.6rem;
-  justify-content: center;
 }
 
-.home-button {
+.home-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1.2rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
   text-decoration: none;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   border: 1px solid transparent;
-  cursor: pointer;
   transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease,
-    background 0.12s ease,
-    color 0.12s ease,
-    border-color 0.12s ease;
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.08s ease;
 }
 
-/* Primario */
-.home-button.primary {
+/* Primario turquesa */
+.home-btn.primary {
   background: var(--lf-primary);
-  border-color: var(--lf-primary);
   color: #022c22;
-  box-shadow: 0 8px 20px rgba(0, 173, 181, 0.25);
+  border-color: var(--lf-primary);
 }
 
-.home-button.primary:hover {
+.home-btn.primary:hover {
+  filter: brightness(0.96);
   transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(0, 173, 181, 0.32);
 }
 
-/* Secundario */
-.home-button.secondary {
-  background: transparent;
-  border-color: var(--lf-dark-soft);
+/* Secundario outline */
+.home-btn.secondary {
+  background: #ffffff;
   color: var(--lf-dark-soft);
+  border-color: var(--lf-border);
 }
 
-.home-button.secondary:hover {
-  background: rgba(57, 62, 70, 0.06);
+.home-btn.secondary:hover {
+  background: #f9fafb;
 }
 
-/* ===== TABLET ===== */
+/* ===== Responsive ===== */
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .home-actions {
+    flex-direction: row;
+  }
+
+  .home-btn {
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
   .home-container {
-    min-height: auto;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    align-items: flex-start;
+    padding: 1.2rem 1rem 1.8rem;
+    align-items: flex-start; /* baja un poco la card en cel */
   }
 
-  .home-hero {
-    padding: 1.6rem 1.2rem;
-    border-radius: 16px;
-  }
-
-  .home-title {
-    font-size: 1.6rem;
-  }
-}
-
-/* ===== MÓVIL (iPhone / Samsung) ===== */
-
-@media (max-width: 480px) {
-  .home-container {
-    padding-top: 0.6rem;
-    padding-bottom: 1.2rem;
-  }
-
-  .home-hero {
-    max-width: 100%;
-    padding: 1.4rem 1rem;
-    margin: 0 auto;        /* 👈 importantísimo, centrado y SIN negativos */
+  .home-card {
     border-radius: 14px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    padding: 1.3rem 1.25rem 1.1rem;
   }
 
-  .home-title {
+  .home-card h1 {
     font-size: 1.4rem;
   }
 
-  .home-subtitle {
+  .home-text {
     font-size: 0.9rem;
   }
 
-  .home-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .home-button {
-    width: 100%;
-    max-width: 260px;       /* ya no se ven enormes */
-    font-size: 0.86rem;
-    padding-block: 0.45rem;
+  .home-btn {
+    width: 100%; /* botones full width en cel */
   }
 }

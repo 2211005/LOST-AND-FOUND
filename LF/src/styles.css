@@ -17,6 +17,8 @@
   /* Texto */
   --lf-text: #111827;
   --lf-text-muted: #6b7280;
+  --lf-font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 
   /* Estados */
   --lf-success: #16a34a;
@@ -26,13 +28,50 @@
   --lf-warning-soft: #fef9c3;
 }
 
-/* Fondo global y tipografía */
+/* 🧱 Reset básico + tipografía global */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    sans-serif;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* evita scroll lateral global */
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--lf-font-sans);
   background: var(--lf-bg);
   color: var(--lf-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Imágenes y videos responsivos */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inputs y botones heredan la fuente */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Links sin subrayado por defecto (lo controlamos por componente) */
+a {
+  color: inherit;
+  text-decoration: none;
 }

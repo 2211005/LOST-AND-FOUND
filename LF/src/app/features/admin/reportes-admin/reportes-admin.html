@@ -55,81 +55,87 @@
 </p>
 
 <!-- Tabla usando la lista filtrada -->
-<!-- Tabla usando la lista filtrada -->
-<table
-  class="reportes-table"
+<div
+  class="admin-table-wrapper"
   *ngIf="!loading() && !error() && filteredReports.length > 0"
 >
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th>Tipo</th>
-      <th>Lugar</th>
-      <th>Fecha</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let r of filteredReports">
-      <td>
-        <a [routerLink]="['/admin/reportes', r._id]" class="link-detalle">
-          {{ r.title }}
-        </a>
-      </td>
+  <table class="reportes-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Tipo</th>
+        <th>Lugar</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of filteredReports">
+        <td>
+          <a [routerLink]="['/admin/reportes', r._id]" class="link-detalle">
+            {{ r.title }}
+          </a>
+        </td>
 
-      <!-- Tipo como badge -->
-      <td>
-        <span class="badge badge-type" [ngClass]="r.type">
-          {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
-        </span>
-      </td>
+        <!-- Tipo como badge -->
+        <td>
+          <span class="badge badge-type" [ngClass]="r.type">
+            {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+          </span>
+        </td>
 
-      <td>{{ r.location }}</td>
-      <td>{{ r.date | date: 'shortDate' }}</td>
+        <td>{{ r.location }}</td>
+        <td>{{ r.date | date: 'shortDate' }}</td>
 
-      <!-- Estado como badge de color -->
-      <td>
-        <span
-          class="badge badge-status"
-          [ngClass]="{
-            'status-nuevo': (r.status || 'Nuevo') === 'Nuevo',
-            'status-verificado': (r.status || 'Nuevo') === 'Verificado',
-            'status-espera':
-              (r.status || 'Nuevo') === 'En espera de dueño',
-            'status-entregado': (r.status || 'Nuevo') === 'Entregado',
-            'status-rechazado': (r.status || 'Nuevo') === 'Rechazado'
-          }"
-        >
-          {{ r.status || 'Nuevo' }}
-        </span>
-      </td>
+        <!-- Estado como badge de color -->
+        <td>
+          <span
+            class="badge badge-status"
+            [ngClass]="{
+              'status-nuevo': (r.status || 'Nuevo') === 'Nuevo',
+              'status-verificado': (r.status || 'Nuevo') === 'Verificado',
+              'status-espera':
+                (r.status || 'Nuevo') === 'En espera de dueño',
+              'status-entregado': (r.status || 'Nuevo') === 'Entregado',
+              'status-rechazado': (r.status || 'Nuevo') === 'Rechazado'
+            }"
+          >
+            {{ r.status || 'Nuevo' }}
+          </span>
+        </td>
 
-      <!-- Acciones: select + eliminar -->
-      <td class="actions-cell">
-        <select
-          class="estado-select"
-          [value]="r.status || 'Nuevo'"
-          (change)="cambiarEstado(r, $any($event.target).value)"
-          [disabled]="saving() === r._id || deletingId() === r._id"
-        >
-          <option *ngFor="let s of statuses" [value]="s">
-            {{ s }}
-          </option>
-        </select>
+        <!-- Acciones: select + eliminar -->
+        <td class="actions-cell">
+          <select
+            class="estado-select"
+            [value]="r.status || 'Nuevo'"
+            (change)="cambiarEstado(r, $any($event.target).value)"
+            [disabled]="saving() === r._id || deletingId() === r._id"
+          >
+            <option *ngFor="let s of statuses" [value]="s">
+              {{ s }}
+            </option>
+          </select>
 
-        <button
-          type="button"
-          class="btn-delete"
-          (click)="onDeleteReport(r)"
-          [disabled]="deletingId() === r._id"
-        >
-          {{ deletingId() === r._id ? 'Eliminando...' : 'Eliminar' }}
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          <button
+            type="button"
+            class="btn-delete"
+            (click)="onDeleteReport(r)"
+            [disabled]="deletingId() === r._id"
+          >
+            {{ deletingId() === r._id ? 'Eliminando...' : 'Eliminar' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p *ngIf="!loading() && !error() && filteredReports.length === 0">
+  No hay reportes que coincidan con los filtros.
+</p>
+
 
 
 

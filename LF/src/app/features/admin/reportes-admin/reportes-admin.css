@@ -179,3 +179,22 @@
   opacity: 0.6;
   cursor: default;
 }
+/* Contenedor que permite scroll horizontal SOLO en la tabla */
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;                 /* 👈 aquí sí dejamos scroll lateral */
+  -webkit-overflow-scrolling: touch;
+  margin-top: 0.3rem;
+}
+
+/* La tabla ya ocupa el 100%, aquí solo aseguramos un ancho mínimo
+   para que quepan bien las columnas en cel */
+@media (max-width: 768px) {
+  .reportes-table {
+    min-width: 720px;               /* puedes ajustar 680 / 700 si quieres */
+  }
+
+  .actions-cell {
+    min-width: 160px;               /* espacio decente para select + botón */
+  }
+}

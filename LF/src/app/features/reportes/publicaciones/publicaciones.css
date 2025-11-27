@@ -302,3 +302,65 @@
     width: 100%;
   }
 }
+
+.pub-footer {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pub-reporter .label {
+  font-size: 0.75rem;
+  color: var(--lf-text-muted);
+}
+
+.pub-reporter span:last-child {
+  font-size: 0.86rem;
+  color: var(--lf-text);
+}
+
+/* Botón "Ver detalle (admin)" */
+.pub-details-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.78rem;
+  background: var(--lf-dark-soft);
+  color: #f9fafb;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.pub-details-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* En móvil, que el botón se haga full-width si hace falta */
+@media (max-width: 480px) {
+  .pub-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-details-btn {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .pub-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-details-btn {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}

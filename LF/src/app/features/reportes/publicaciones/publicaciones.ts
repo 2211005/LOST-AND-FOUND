@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { PublicacionesCard } from './publicaciones-card';
 import { ReportsService } from '../../../shared/services/reports';
 import { Report } from '../../../shared/models/report.model';
 import { AuthService } from '../../../shared/services/auth';

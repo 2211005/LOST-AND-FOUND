@@ -1,31 +1,57 @@
-<!-- src/app/features/reportes/publicaciones/publicaciones-card.html -->
-
 <article class="pub-card">
-  <header>
-    <h3>{{ report.title }}</h3>
-    <span class="badge" [ngClass]="report.type">
-      {{ report.type === 'lost' ? 'Perdido' : 'Encontrado' }}
-    </span>
-  </header>
+  <!-- HEADER: tipo, categoría, entregado -->
+  <div class="pub-header">
+    <div class="pub-badges">
+      <span class="pub-type" [ngClass]="report.type">
+        {{ report.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+      </span>
 
-  <p class="description">
+      <span class="pub-category">
+        {{ report.category | titlecase }}
+      </span>
+    </div>
+
+    <span *ngIf="report.status === 'Entregado'" class="pub-delivered-pill">
+      Entregado
+    </span>
+  </div>
+
+  <!-- Título / descripción -->
+  <h3 class="pub-title">{{ report.title }}</h3>
+  <p class="pub-description">
     {{ report.description }}
   </p>
 
-  <p class="meta">
-    <strong>Lugar:</strong> {{ report.location }}<br />
-    <strong>Fecha:</strong> {{ report.date | date : 'shortDate' }}
-  </p>
+  <!-- Meta -->
+  <div class="pub-meta">
+    <div>
+      <span class="label">Lugar:</span>
+      <span>{{ report.location }}</span>
+    </div>
+    <div>
+      <span class="label">Fecha:</span>
+      <span>{{ report.date | date: 'MM/dd/yy' }}</span>
+    </div>
+    <div>
+      <span class="label">Estado:</span>
+      <span class="pub-status">{{ report.status || 'Nuevo' }}</span>
+    </div>
+  </div>
 
-  <p class="meta">
-    <strong>Estado:</strong> {{ report.status || 'Nuevo' }}
-  </p>
+  <!-- FOOTER: reportante + botón admin -->
+  <div class="pub-footer">
+    <div class="pub-reporter">
+      <span class="label">Reportante:</span>
+      <span>{{ report.reporterName }}</span>
+    </div>
 
-  <footer *ngIf="report.photoUrl">
-    <img
-      [src]="report.photoUrl"
-      alt="Foto del objeto"
-      class="pub-image"
-    />
-  </footer>
+    <button
+      type="button"
+      class="pub-details-btn"
+      [routerLink]="['/admin/reportes', report._id]"
+      *ngIf="adminView"
+    >
+      Ver detalle (admin)
+    </button>
+  </div>
 </article>
