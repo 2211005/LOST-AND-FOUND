@@ -1,0 +1,19 @@
+<h2>Acceso administrativo</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Correo</label>
+    <input type="email" formControlName="email" />
+  </div>
+
+  <div>
+    <label>Contraseña</label>
+    <input type="password" formControlName="password" />
+  </div>
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Entrando...' : 'Ingresar' }}
+  </button>
+</form>
+
+<p *ngIf="error()" style="color: red;">{{ error() }}</p>

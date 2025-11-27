@@ -1,0 +1,138 @@
+<h2 class="page-title">Panel de administración - Reportes</h2>
+<p class="page-subtitle">
+  Revisa, actualiza el estado, registra entregas o elimina reportes inapropiados.
+</p>
+
+<!-- 🔍 Barra de filtros -->
+<form class="filter-bar">
+  <div class="filter-group">
+    <label>Tipo</label>
+    <select [(ngModel)]="filtroTipo" name="filtroTipo">
+      <option value="todos">Todos</option>
+      <option value="lost">Perdidos</option>
+      <option value="found">Encontrados</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Estado</label>
+    <select [(ngModel)]="filtroEstado" name="filtroEstado">
+      <option value="todos">Todos</option>
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Categoría</label>
+    <select [(ngModel)]="filtroCategoria" name="filtroCategoria">
+      <option value="todos">Todas</option>
+      <option value="electronics">Electrónicos</option>
+      <option value="documents">Documentos</option>
+      <option value="clothing">Ropa</option>
+      <option value="accessories">Accesorios</option>
+      <option value="other">Otros</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Desde</label>
+    <input type="date" [(ngModel)]="filtroDesde" name="filtroDesde" />
+  </div>
+
+  <div class="filter-group">
+    <label>Hasta</label>
+    <input type="date" [(ngModel)]="filtroHasta" name="filtroHasta" />
+  </div>
+
+  <button type="button" (click)="limpiarFiltros()">
+    Limpiar filtros
+  </button>
+</form>
+
+<p *ngIf="loading()">Cargando...</p>
+<p *ngIf="!loading() && error()" style="color: red;">
+  {{ error() }}
+</p>
+
+<!-- Tabla usando la lista filtrada -->
+<!-- Tabla usando la lista filtrada -->
+<table
+  class="reportes-table"
+  *ngIf="!loading() && !error() && filteredReports.length > 0"
+>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Tipo</th>
+      <th>Lugar</th>
+      <th>Fecha</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of filteredReports">
+      <td>
+        <a [routerLink]="['/admin/reportes', r._id]" class="link-detalle">
+          {{ r.title }}
+        </a>
+      </td>
+
+      <!-- Tipo como badge -->
+      <td>
+        <span class="badge badge-type" [ngClass]="r.type">
+          {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+        </span>
+      </td>
+
+      <td>{{ r.location }}</td>
+      <td>{{ r.date | date: 'shortDate' }}</td>
+
+      <!-- Estado como badge de color -->
+      <td>
+        <span
+          class="badge badge-status"
+          [ngClass]="{
+            'status-nuevo': (r.status || 'Nuevo') === 'Nuevo',
+            'status-verificado': (r.status || 'Nuevo') === 'Verificado',
+            'status-espera':
+              (r.status || 'Nuevo') === 'En espera de dueño',
+            'status-entregado': (r.status || 'Nuevo') === 'Entregado',
+            'status-rechazado': (r.status || 'Nuevo') === 'Rechazado'
+          }"
+        >
+          {{ r.status || 'Nuevo' }}
+        </span>
+      </td>
+
+      <!-- Acciones: select + eliminar -->
+      <td class="actions-cell">
+        <select
+          class="estado-select"
+          [value]="r.status || 'Nuevo'"
+          (change)="cambiarEstado(r, $any($event.target).value)"
+          [disabled]="saving() === r._id || deletingId() === r._id"
+        >
+          <option *ngFor="let s of statuses" [value]="s">
+            {{ s }}
+          </option>
+        </select>
+
+        <button
+          type="button"
+          class="btn-delete"
+          (click)="onDeleteReport(r)"
+          [disabled]="deletingId() === r._id"
+        >
+          {{ deletingId() === r._id ? 'Eliminando...' : 'Eliminar' }}
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<p *ngIf="!loading() && !error() && filteredReports.length === 0">
+  No hay reportes que coincidan con los filtros.
+</p>

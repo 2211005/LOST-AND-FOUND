@@ -1,0 +1,100 @@
+<h2>Reportar objeto encontrado</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Título -->
+  <div class="form-group">
+    <label for="title">Título *</label>
+    <input id="title" type="text" formControlName="title" />
+    <small class="error" *ngIf="f['title'].touched && f['title'].invalid">
+      Este campo es obligatorio (máx. 100 caracteres).
+    </small>
+  </div>
+
+  <!-- Descripción -->
+  <div class="form-group">
+    <label for="description">Descripción *</label>
+    <textarea id="description" formControlName="description"></textarea>
+    <small class="error" *ngIf="f['description'].touched && f['description'].invalid">
+      Describe brevemente el objeto y cómo lo encontraste.
+    </small>
+  </div>
+
+  <!-- Categoría -->
+  <div class="form-group">
+    <label for="category">Categoría *</label>
+    <select id="category" formControlName="category">
+      <option value="">Selecciona una opción</option>
+      <option value="electronics">Electrónicos</option>
+      <option value="documents">Documentos</option>
+      <option value="clothing">Ropa</option>
+      <option value="accessories">Accesorios</option>
+      <option value="other">Otros</option>
+    </select>
+    <small class="error" *ngIf="f['category'].touched && f['category'].invalid">
+      Selecciona una categoría.
+    </small>
+  </div>
+
+  <!-- Lugar -->
+  <div class="form-group">
+    <label for="location">Lugar donde lo encontraste *</label>
+    <input id="location" type="text" formControlName="location" />
+    <small class="error" *ngIf="f['location'].touched && f['location'].invalid">
+      Indica el lugar aproximado donde lo encontraste.
+    </small>
+  </div>
+
+  <!-- Fecha -->
+  <div class="form-group">
+    <label for="date">Fecha en que lo encontraste *</label>
+    <input id="date" type="date" formControlName="date" />
+    <small class="error" *ngIf="f['date'].touched && f['date'].invalid">
+      Selecciona una fecha.
+    </small>
+  </div>
+
+  <!-- Datos de contacto -->
+  <div class="form-group">
+    <label for="reporterName">Tu nombre *</label>
+    <input id="reporterName" type="text" formControlName="reporterName" />
+    <small class="error" *ngIf="f['reporterName'].touched && f['reporterName'].invalid">
+      Este campo es obligatorio.
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="reporterEmail">Correo electrónico *</label>
+    <input id="reporterEmail" type="email" formControlName="reporterEmail" />
+    <small class="error" *ngIf="f['reporterEmail'].touched && f['reporterEmail'].invalid">
+      <span *ngIf="f['reporterEmail'].errors?.['required']">
+        El correo es obligatorio.
+      </span>
+      <span *ngIf="f['reporterEmail'].errors?.['email']">
+        Ingresa un correo válido.
+      </span>
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="reporterPhone">Teléfono de contacto *</label>
+    <input id="reporterPhone" type="text" formControlName="reporterPhone" />
+    <small class="error" *ngIf="f['reporterPhone'].touched && f['reporterPhone'].invalid">
+      Este campo es obligatorio.
+    </small>
+  </div>
+
+  <!-- Foto opcional -->
+  <div class="form-group">
+    <label for="photoUrl">URL de foto (opcional)</label>
+    <input id="photoUrl" type="text" formControlName="photoUrl" />
+  </div>
+
+  <!-- Mensajes generales -->
+  <p class="error" *ngIf="error()">{{ error() }}</p>
+  <p class="success" *ngIf="success()">{{ success() }}</p>
+
+  <!-- Botón -->
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Enviando...' : 'Enviar reporte' }}
+  </button>
+</form>

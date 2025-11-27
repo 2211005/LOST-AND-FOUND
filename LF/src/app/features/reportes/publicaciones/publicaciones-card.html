@@ -1,0 +1,31 @@
+<!-- src/app/features/reportes/publicaciones/publicaciones-card.html -->
+
+<article class="pub-card">
+  <header>
+    <h3>{{ report.title }}</h3>
+    <span class="badge" [ngClass]="report.type">
+      {{ report.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+    </span>
+  </header>
+
+  <p class="description">
+    {{ report.description }}
+  </p>
+
+  <p class="meta">
+    <strong>Lugar:</strong> {{ report.location }}<br />
+    <strong>Fecha:</strong> {{ report.date | date : 'shortDate' }}
+  </p>
+
+  <p class="meta">
+    <strong>Estado:</strong> {{ report.status || 'Nuevo' }}
+  </p>
+
+  <footer *ngIf="report.photoUrl">
+    <img
+      [src]="report.photoUrl"
+      alt="Foto del objeto"
+      class="pub-image"
+    />
+  </footer>
+</article>

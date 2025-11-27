@@ -1,0 +1,181 @@
+/* Título / subtítulo */
+.page-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 0.9rem;
+}
+
+/* Filtros (ya tienes clases, solo embellecemos) */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 140px;
+}
+
+.filter-group label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.filter-group select,
+.filter-group input[type='date'] {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+}
+
+.filter-bar button {
+  align-self: flex-end;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+/* Tabla base */
+.reportes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.reportes-table thead {
+  background: #f3f4f6;
+}
+
+.reportes-table th,
+.reportes-table td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.reportes-table th {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+}
+
+.reportes-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Link al detalle */
+.link-detalle {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-detalle:hover {
+  text-decoration: underline;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Tipo: perdido/encontrado */
+.badge-type.lost {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-type.found {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Estado */
+.badge-status {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.badge-status.status-nuevo {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-status.status-verificado {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-status.status-espera {
+  background: #fef9c3;
+  color: #92400e;
+}
+
+.badge-status.status-entregado {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-status.status-rechazado {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Acciones */
+.actions-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.estado-select {
+  font-size: 0.78rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: white;
+}
+
+/* Botón eliminar (si ya tenías uno, puedes sustituirlo por este) */
+.btn-delete {
+  border: none;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.78rem;
+  background: #b91c1c;
+  color: #f9fafb;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.btn-delete[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
