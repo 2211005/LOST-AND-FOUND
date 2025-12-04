@@ -1,7 +1,3 @@
-📦 README.md — Lost & Found
-
-(Versión profesional para GitHub)
-
 # 🧳 Lost & Found – Sistema de Reporte de Objetos Perdidos
 
 Aplicación web diseñada para facilitar el reporte, registro y recuperación de objetos perdidos dentro de una organización o institución.  
