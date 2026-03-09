@@ -3,16 +3,32 @@ const router = express.Router();
 
 const reportController = require('../controllers/report.controller');
 const { authenticate, requireAdmin } = require('../middleware/auth.middleware');
-// O '../middlewares/auth.middleware' si tu carpeta se llama con "s"
-// (usa el que actualmente NO te da MODULE_NOT_FOUND)
+// Si tu archivo realmente se llama middlewares/auth.middleware.js, cambia la ruta arriba
 
+// 👇 NUEVO: importamos la config de subida
+const upload = require('../config/upload.config');
 
+// =======================
 // RUTAS PÚBLICAS
-router.get('/', reportController.getReports);
-router.get('/:id', reportController.getReportById);
-router.post('/', reportController.createReport);
+// =======================
 
+// Lista de reportes (con filtros, etc.)
+router.get('/', reportController.getReports);
+
+// Obtener un reporte por ID
+router.get('/:id', reportController.getReportById);
+
+// Crear reporte (ahora acepta archivo "photo")
+router.post(
+  '/',
+  upload.single('photo'),        // 👈 aquí Multer mete req.file
+  reportController.createReport
+);
+
+// =======================
 // RUTAS SOLO ADMIN
+// =======================
+
 router.patch(
   '/:id/status',
   authenticate,
@@ -27,7 +43,6 @@ router.patch(
   reportController.registerDelivery
 );
 
-// 🔴 ELIMINAR REPORTE (SOLO ADMIN)
 router.delete(
   '/:id',
   authenticate,
