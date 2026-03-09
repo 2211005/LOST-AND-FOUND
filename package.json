@@ -1,11 +1,11 @@
 {
   "name": "integradora",
   "version": "1.0.0",
-  "description": "Este es un repositiorio de para el proyecto Lost &amp; Found",
-  "main": "src/server.js",
+  "description": "Este es un repositorio para el proyecto Lost & Found",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently -n \"BACK,FRONT\" -c \"green,blue\" \"cd LF_BACK && npm run dev\" \"cd LF && ng serve --proxy-config proxy.conf.json\""
+    "dev:back": "npm --prefix LF_BACK run dev",
+    "dev:front": "npm --prefix LF run start -- --proxy-config proxy.conf.json",
+    "dev": "concurrently \"npm run dev:back\" \"npm run dev:front\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

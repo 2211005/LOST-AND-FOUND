@@ -1,48 +1,132 @@
+.report-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page-title {
+  margin-top: 0.2rem;
+  margin-bottom: 0.15rem;
+}
+
+.page-subtitle {
+  margin-bottom: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--lf-text-muted);
+}
+
+.report-card {
+  background: var(--lf-surface);
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem 1.2rem;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.09);
+  border: 1px solid var(--lf-border);
+}
+
+/* Grupo de campos */
 .form-group {
-  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.7rem;
 }
 
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--lf-text-muted);
+}
+
+/* Inputs / selects / textarea */
 .form-group input,
-.form-group textarea,
-.form-group select {
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
-}
-
-.form-group input.ng-invalid.ng-touched,
-.form-group textarea.ng-invalid.ng-touched,
-.form-group select.ng-invalid.ng-touched {
-  border-color: #e53935;
-  background-color: #ffebee;
-}
-
-.error {
-  color: #e53935;
-  font-size: 0.75rem;
-  margin-top: 0.15rem;
-}
-
-.success {
-  color: #2e7d32;
+.form-group select,
+.form-group textarea {
+  border-radius: 8px;
+  border: 1px solid var(--lf-border);
+  padding: 0.45rem 0.6rem;
   font-size: 0.85rem;
-  margin: 0.5rem 0;
+  background: #ffffff;
+  color: var(--lf-text);
+  transition:
+    border-color 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease;
 }
 
-button[type='submit'] {
-  margin-top: 0.5rem;
-  padding: 0.45rem 1.2rem;
-  border-radius: 4px;
-  border: none;
-  background-color: #1976d2;
-  color: white;
+.form-group textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--lf-primary);
+  box-shadow: 0 0 0 2px var(--lf-primary-soft);
+}
+
+/* Mensajes de error bajo cada input */
+.error {
+  font-size: 0.75rem;
+  color: var(--lf-danger);
+  margin: 0;
+}
+
+/* Mensaje de error general debajo del form */
+.error.general {
+  margin-top: 0.4rem;
+}
+
+/* Mensaje de éxito */
+.success {
+  font-size: 0.8rem;
+  color: var(--lf-success);
+  margin-top: 0.4rem;
+}
+
+/* Botón principal */
+.form-actions {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  border-radius: 999px;
+  border: 1px solid var(--lf-primary);
+  background: var(--lf-primary);
+  color: #022c22;
+  padding: 0.5rem 1.3rem;
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: filter 0.12s ease, transform 0.08s ease;
 }
 
-button[type='submit'][disabled] {
+.form-actions button:hover:not(:disabled) {
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+}
+
+.form-actions button:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 640px) {
+  .report-card {
+    padding: 1.1rem 1.1rem 1rem;
+    border-radius: 14px;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .form-actions button {
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -36,7 +36,7 @@ Este proyecto fue desarrollado como parte del **Proyecto Integrador** de la mate
 - Multer (para imágenes)
 
 ### **DevOps**
-- Docker
+- Docker (por implementar a futuro)
 - Git / GitHub
 - Postman
 

@@ -41,27 +41,38 @@
   class="pub-grid"
   *ngIf="!loading() && !error() && totalItems > 0"
 >
+<div
+  class="pub-grid"
+  *ngIf="!loading() && !error() && totalItems > 0"
+>
   <article class="pub-card" *ngFor="let r of paginatedReports">
-
-    <div
-    class="pub-delivered-pill"
-    *ngIf="(r.status || 'Nuevo') === 'Entregado'"
-  >
-    Entregado
-  </div>
-
+    <!-- HEADER: tipo, categoría, entregado -->
     <div class="pub-header">
-      <span class="pub-type" [ngClass]="r.type">
-        {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+      <div class="pub-badges">
+        <span class="pub-type" [ngClass]="r.type">
+          {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+        </span>
+
+        <span class="pub-category">
+          {{ r.category | titlecase }}
+        </span>
+      </div>
+
+      <span
+        *ngIf="(r.status || 'Nuevo') === 'Entregado'"
+        class="pub-delivered-pill"
+      >
+        Entregado
       </span>
-      <span class="pub-category">{{ r.category | titlecase }}</span>
     </div>
 
+    <!-- TÍTULO / DESCRIPCIÓN -->
     <h3 class="pub-title">{{ r.title }}</h3>
     <p class="pub-description">
       {{ r.description }}
     </p>
 
+    <!-- META -->
     <div class="pub-meta">
       <div>
         <span class="label">Lugar:</span>
@@ -77,11 +88,13 @@
       </div>
     </div>
 
+    <!-- FOOTER -->
     <div class="pub-footer">
       <div class="pub-reporter">
         <span class="label">Reportante:</span>
         <span>{{ r.reporterName }}</span>
       </div>
+
       <button
         class="pub-details-btn"
         [routerLink]="['/admin/reportes', r._id]"
@@ -91,6 +104,8 @@
       </button>
     </div>
   </article>
+</div>
+
 </div>
 
 <!-- Paginación -->

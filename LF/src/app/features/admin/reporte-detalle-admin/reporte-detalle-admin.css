@@ -1,122 +1,64 @@
+/* ===== CONTENEDOR GENERAL ===== */
+
 .detalle-wrapper {
-  padding: 0.8rem 0.4rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0.8rem 0 1.5rem;
 }
+
+/* Mensaje de error suelto */
+.error-text {
+  color: var(--lf-danger);
+  font-size: 0.9rem;
+}
+
+/* ===== HEADER ===== */
 
 .detalle-header {
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.7rem;
 }
 
-.page-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+.detalle-header .page-title {
+  margin: 0 0 0.15rem;
+  font-size: 1.25rem;
 }
 
-.page-subtitle {
+.detalle-header .page-subtitle {
+  margin: 0.3rem 0 0;
   font-size: 0.9rem;
-  color: #4b5563;
+  color: var(--lf-text-muted);
 }
 
-.error-text {
-  color: #b91c1c;
-}
-
+/* Fila de badges (tipo + estado) */
 .badges-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-bottom: 0.3rem;
+  margin-top: 0.2rem;
 }
 
-/* layout general */
-.detalle-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-  gap: 1rem;
-}
-
-@media (max-width: 800px) {
-  .detalle-layout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* tarjetas */
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1rem 1rem;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-}
-
-.card h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
-}
-
-.card-info .descripcion {
-  font-size: 0.9rem;
-  color: #374151;
-  margin-bottom: 0.75rem;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.5rem 0.8rem;
-  margin-bottom: 0.6rem;
-}
-
-.label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #6b7280;
-}
-
-.value {
-  font-size: 0.9rem;
-  color: #111827;
-}
-
-.reporter-box {
-  margin-top: 0.5rem;
-}
-
-.reporter-box h4 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-}
-
-.reporter-grid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-
-/* Badges (mismas ideas que en el panel) */
+/* Badges genericos */
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.1rem 0.5rem;
+  padding: 0.12rem 0.55rem;
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 500;
 }
 
-/* Tipo */
+/* Tipo perdido/encontrado */
 .badge-type.lost {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--lf-danger-soft);
+  color: var(--lf-danger);
 }
 
 .badge-type.found {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--lf-success-soft);
+  color: var(--lf-success);
 }
 
-/* Status */
+/* Estado */
 .badge-status {
   background: #e5e7eb;
   color: #374151;
@@ -133,83 +75,248 @@
 }
 
 .badge-status.status-espera {
-  background: #fef9c3;
+  background: var(--lf-warning-soft);
   color: #92400e;
 }
 
 .badge-status.status-entregado {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--lf-success-soft);
+  color: var(--lf-success);
 }
 
 .badge-status.status-rechazado {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--lf-danger-soft);
+  color: var(--lf-danger);
 }
 
-/* Entrega */
+/* ===== LAYOUT 2 COLUMNAS ===== */
+
+.detalle-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* Tarjeta base */
+.card {
+  background: var(--lf-surface);
+  border-radius: 16px;
+  border: 1px solid var(--lf-border);
+  padding: 1.2rem 1.3rem 1.1rem;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+}
+
+.card h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--lf-text);
+}
+
+/* Descripción principal del reporte */
+.descripcion {
+  font-size: 0.9rem;
+  color: var(--lf-text);
+  margin: 0 0 0.9rem;
+}
+
+/* ===== INFO GRID ===== */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.4rem 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--lf-text-muted);
+}
+
+.value {
+  font-size: 0.88rem;
+  color: var(--lf-text);
+}
+
+/* Bloque del reportante */
+.reporter-box {
+  margin-top: 0.3rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--lf-border);
+}
+
+.reporter-box h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--lf-dark-soft);
+}
+
+.reporter-grid {
+  margin-bottom: 0;
+}
+
+/* ===== COLUMNA ENTREGA ===== */
+
 .card-entrega .entrega-resumen {
-  font-size: 0.85rem;
-  color: #4b5563;
-  margin-bottom: 0.7rem;
+  font-size: 0.86rem;
+  color: var(--lf-text-muted);
+  margin: 0 0 0.8rem;
 }
 
+/* Link a la evidencia */
 .link-evidencia {
-  color: #2563eb;
+  color: var(--lf-primary);
   text-decoration: none;
+  font-size: 0.86rem;
 }
 
 .link-evidencia:hover {
   text-decoration: underline;
 }
 
+/* Notas de entrega */
 .notas-entrega {
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
 }
 
-/* Formulario entrega */
+.notas-entrega .label {
+  margin-bottom: 0.15rem;
+}
+
+.notas-entrega .value {
+  font-size: 0.86rem;
+}
+
+/* ===== FORMULARIO DE ENTREGA ===== */
+
 .form-group {
-  margin-bottom: 0.6rem;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  margin-bottom: 0.75rem;
 }
 
 .form-group label {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--lf-text-muted);
 }
 
 .form-group input,
 .form-group textarea {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.45rem;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--lf-border);
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  background: #ffffff;
+  color: var(--lf-text);
+  transition:
+    border-color 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--lf-primary);
+  box-shadow: 0 0 0 2px var(--lf-primary-soft);
 }
 
 .form-group input.invalid {
-  border-color: #dc2626;
+  border-color: var(--lf-danger);
+  box-shadow: 0 0 0 1px var(--lf-danger-soft);
 }
 
+/* Error bajo el campo */
 .field-error {
   font-size: 0.75rem;
-  color: #b91c1c;
+  color: var(--lf-danger);
 }
 
+/* Botón principal para registrar entrega */
 .btn-primary {
-  margin-top: 0.3rem;
-  border: none;
   border-radius: 999px;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.85rem;
-  background: #111827;
-  color: #f9fafb;
+  border: 1px solid var(--lf-primary);
+  background: var(--lf-primary);
+  color: #022c22;
+  padding: 0.45rem 1.3rem;
+  font-size: 0.86rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: filter 0.12s ease, transform 0.08s ease;
 }
 
-.btn-primary[disabled] {
-  opacity: 0.7;
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
   cursor: default;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .detalle-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    border-radius: 14px;
+    padding: 1.05rem 1.05rem 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .detalle-wrapper {
+    padding-bottom: 1.2rem;
+  }
+
+  .detalle-header .page-title {
+    font-size: 1.15rem;
+  }
+
+  .detalle-header .page-subtitle {
+    font-size: 0.86rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+.detalle-id {
+  margin: 0.50rem 0 0.50rem;
+  font-size: 0.78rem;
+  color: var(--lf-text-muted);
+}
+
+.detalle-id code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.78rem;
+  background: #f3f4f6;
+  padding: 0.08rem 0.3rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
 }

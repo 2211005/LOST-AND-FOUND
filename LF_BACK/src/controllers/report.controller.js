@@ -1,7 +1,7 @@
 // src/controllers/report.controller.js
 const Report = require('../models/Report');
-const mongoose = require('mongoose')
-// 👇 NUEVO: servicio de correo y plantillas
+const mongoose = require('mongoose');
+// 👇 servicio de correo y plantillas
 const { sendMail } = require('../services/emailService');
 const {
   buildReportCreatedEmail,
@@ -53,9 +53,13 @@ async function getReportById(req, res) {
 }
 
 // POST /api/reports
+// 👉 ahora soporta:
+// - campos normales en req.body (porque viene multipart/form-data)
+// - archivo en req.file (subido con Multer como "photo")
 async function createReport(req, res) {
   try {
     console.log('👉 Llegó POST /api/reports con body:', req.body);
+    console.log('👉 Archivo recibido (req.file):', req.file);
 
     const {
       title,
@@ -64,7 +68,7 @@ async function createReport(req, res) {
       category,
       location,
       date,
-      photoUrl,
+      photoUrl,       // por si el front aún manda URL manual
       reporterName,
       reporterEmail,
       reporterPhone,
@@ -77,6 +81,14 @@ async function createReport(req, res) {
       });
     }
 
+    // 🖼 decidir la foto final
+    let finalPhotoUrl = photoUrl || null;
+
+    // Si viene archivo subido, usamos la ruta /uploads/...
+    if (req.file) {
+      finalPhotoUrl = `/uploads/${req.file.filename}`;
+    }
+
     const newReport = new Report({
       title,
       description,
@@ -84,15 +96,17 @@ async function createReport(req, res) {
       category,
       location,
       date,
-      photoUrl,
+      photoUrl: finalPhotoUrl,
       reporterName,
       reporterEmail,
       reporterPhone,
+      // status por default si tu esquema no lo pone solo
+      // status: 'Nuevo',
     });
 
     const saved = await newReport.save();
 
-    // 👇 NUEVO: notificación al reportero
+    // 👇 notificación al reportero
     if (reporterEmail) {
       try {
         const { subject, text, html } = buildReportCreatedEmail(saved);
@@ -109,7 +123,7 @@ async function createReport(req, res) {
       }
     }
 
-    // 👇 OPCIONAL: notificación al admin (puedes cambiar el correo)
+    // 👇 notificación al admin
     try {
       await sendMail({
         to: process.env.ADMIN_EMAIL || 'notificaciones.lostandfound@gmail.com',
@@ -159,7 +173,7 @@ async function updateReportStatus(req, res) {
       return res.status(404).json({ message: 'Reporte no encontrado' });
     }
 
-    // 👇 NUEVO: notificación por cambio de estado
+    // 👇 notificación por cambio de estado
     if (report.reporterEmail) {
       try {
         const { subject, text, html } = buildReportStatusUpdatedEmail(report);
@@ -212,7 +226,7 @@ async function registerDelivery(req, res) {
       return res.status(404).json({ message: 'Reporte no encontrado' });
     }
 
-    // 👇 NUEVO: notificación cuando se marca como entregado
+    // 👇 notificación cuando se marca como entregado
     if (report.reporterEmail) {
       try {
         const { subject, text, html } = buildReportDeliveredEmail(report);
@@ -234,7 +248,6 @@ async function registerDelivery(req, res) {
     res.status(500).json({ message: 'Error al registrar entrega' });
   }
 }
-
 
 // DELETE /api/reports/:id
 async function deleteReport(req, res) {
@@ -258,7 +271,6 @@ async function deleteReport(req, res) {
     return res.status(500).json({ message: 'Error al eliminar el reporte' });
   }
 }
-
 
 module.exports = {
   getReports,

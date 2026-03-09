@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth.routes');
 const testMailRoutes = require('./routes/testMail.routes')
 const adminUserRoutes = require('./routes/adminUser.routes');
 const reportRoutes = require('./routes/report.routes')
+const path = require('path');
 
 const app = express();
 
@@ -29,5 +30,10 @@ app.use('/api', testMailRoutes);
 app.use('/api/admin-users', adminUserRoutes);
 app.use('/api/reports', reportRoutes);
 
+//uploads
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, '..', 'uploads'))
+);
 
 module.exports = app;
