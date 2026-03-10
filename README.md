@@ -87,8 +87,9 @@ Antes de ejecutar el proyecto localmente, asegúrate de contar con lo siguiente:
 
 ### Instalación de Angular CLI
 
-```bash
 npm install -g @angular/cli
+
+---
 
 ### 📦 Instalación
 1. Clonar el repositorio
@@ -102,6 +103,8 @@ npm install
 3. Instalar dependencias del backend
 cd ../LF_BACK
 npm install
+
+---
 
 ### 🚀 Ejecución local
 
@@ -119,6 +122,8 @@ npm run dev
 
 El backend se ejecutará en el puerto configurado en el archivo .env.
 
+---
+
 ### 🧪 Pruebas
 
 Frontend
@@ -134,6 +139,8 @@ cd LF_BACK
 npm test
 
 Nota: La cobertura automatizada y el esquema formal de pruebas aún se encuentran pendientes de definición o implementación completa dentro del proyecto.
+
+---
 
 ### 📁 Estructura del proyecto
 
@@ -191,6 +198,8 @@ features/: módulos funcionales principales de la aplicación.
 
 shared/: recursos reutilizables como guards, modelos y servicios.
 
+---
+
 ### 🔐 Variables de entorno
 
 El backend requiere un archivo .env dentro de la carpeta LF_BACK/.
@@ -214,6 +223,8 @@ EMAIL_USER: correo utilizado para procesos relacionados con mensajería o notifi
 EMAIL_PASS: contraseña o clave de aplicación del correo configurado.
 
 Importante: El archivo .env no debe subirse al repositorio y debe incluirse en .gitignore.
+
+---
 
 ### 🤝 Contribución
 
@@ -254,6 +265,16 @@ Mantener actualizada la rama local con respecto a dev
 Usar mensajes de commit claros y descriptivos
 
 Verificar el funcionamiento del sistema antes de abrir un Pull Request
+
+---
+
+### 📄 Licencia
+
+La licencia del proyecto se encuentra pendiente de definición.
+
+Este apartado deberá actualizarse una vez que el equipo determine la licencia oficial del repositorio.
+
+---
 
 ### 👥 Autores
 
