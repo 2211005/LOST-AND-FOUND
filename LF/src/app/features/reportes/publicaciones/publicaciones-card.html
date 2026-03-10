@@ -1,0 +1,57 @@
+<article class="pub-card">
+  <!-- HEADER: tipo, categoría, entregado -->
+  <div class="pub-header">
+    <div class="pub-badges">
+      <span class="pub-type" [ngClass]="report.type">
+        {{ report.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+      </span>
+
+      <span class="pub-category">
+        {{ report.category | titlecase }}
+      </span>
+    </div>
+
+    <span *ngIf="report.status === 'Entregado'" class="pub-delivered-pill">
+      Entregado
+    </span>
+  </div>
+
+  <!-- Título / descripción -->
+  <h3 class="pub-title">{{ report.title }}</h3>
+  <p class="pub-description">
+    {{ report.description }}
+  </p>
+
+  <!-- Meta -->
+  <div class="pub-meta">
+    <div>
+      <span class="label">Lugar:</span>
+      <span>{{ report.location }}</span>
+    </div>
+    <div>
+      <span class="label">Fecha:</span>
+      <span>{{ report.date | date: 'MM/dd/yy' }}</span>
+    </div>
+    <div>
+      <span class="label">Estado:</span>
+      <span class="pub-status">{{ report.status || 'Nuevo' }}</span>
+    </div>
+  </div>
+
+  <!-- FOOTER: reportante + botón admin -->
+  <div class="pub-footer">
+    <div class="pub-reporter">
+      <span class="label">Reportante:</span>
+      <span>{{ report.reporterName }}</span>
+    </div>
+
+    <button
+      type="button"
+      class="pub-details-btn"
+      [routerLink]="['/admin/reportes', report._id]"
+      *ngIf="adminView"
+    >
+      Ver detalle (admin)
+    </button>
+  </div>
+</article>

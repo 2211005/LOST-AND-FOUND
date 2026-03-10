@@ -1,0 +1,140 @@
+/* ===== NAVBAR GENERAL ===== */
+
+.nav-body {
+  position: sticky;      /* se queda arriba al hacer scroll */
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 1.8rem;
+  background: var(--lf-dark);  /* #222831 */
+  color: #f9fafb;
+  border-bottom: 1px solid #020617;
+  box-sizing: border-box;
+}
+
+/* ===== LOGO / NOMBRE ===== */
+
+.nav-logo a {
+  color: #f9fafb;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* ===== ACCIONES ===== */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Link “plano” (Publicaciones, Panel admin) */
+.nav-link {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-link:hover {
+  background: rgba(148, 163, 184, 0.25); /* grisito suave */
+}
+
+/* Botón base (Hacer reporte, Login/Logout) */
+.nav-button {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Botón “Hacer un reporte” → turquesa principal */
+.report-button {
+  background: var(--lf-primary);    /* #00ADB5 */
+  border-color: var(--lf-primary);
+  color: #022c22;
+  font-weight: 600;
+}
+
+.report-button:hover {
+  filter: brightness(0.95);
+}
+
+/* Botones de login / logout → outline claro */
+.login-button {
+  background: transparent;
+  border-color: var(--lf-light);    /* #EEEEEE */
+  color: #f9fafb;
+}
+
+.login-button:hover {
+  background: rgba(238, 238, 238, 0.12);
+}
+
+/* Para el <button> de Cerrar sesión */
+button.nav-button {
+  font-family: inherit;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet y móviles grandes */
+@media (max-width: 640px) {
+  .nav-body {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.7rem 1.2rem;  /* similar a .main-content tablet */
+    gap: 0.5rem;
+  }
+
+  .nav-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.4rem;
+  }
+
+  .nav-link,
+  .nav-button {
+    font-size: 0.82rem;
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+/* Móvil chico (Honor / iPhone) */
+@media (max-width: 480px) {
+  .nav-body {
+    padding-inline: 1rem;  /* 👈 igual que .main-content mobile */
+  }
+
+  .nav-logo a {
+    font-size: 0.9rem;
+  }
+
+  .nav-actions {
+    gap: 0.35rem;
+  }
+
+  .nav-link,
+  .nav-button {
+    font-size: 0.8rem;
+    padding-inline: 0.6rem;
+  }
+}

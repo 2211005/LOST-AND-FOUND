@@ -1,0 +1,191 @@
+<div class="detalle-wrapper">
+  <ng-container *ngIf="loading()">Cargando reporte...</ng-container>
+
+  <ng-container *ngIf="!loading() && error()">
+    <p class="error-text">{{ error() }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="!loading() && !error() && report() as r">
+    <div class="detalle-header">
+      <h2 class="page-title">{{ r.title }}</h2>
+
+      <div class="badges-row">
+        <!-- Tipo -->
+        <span class="badge badge-type" [ngClass]="r.type">
+          {{ r.type === 'lost' ? 'Perdido' : 'Encontrado' }}
+        </span>
+
+        <!-- Estado -->
+        <span
+          class="badge badge-status"
+          [ngClass]="{
+            'status-nuevo': (r.status || 'Nuevo') === 'Nuevo',
+            'status-verificado': (r.status || 'Nuevo') === 'Verificado',
+            'status-espera':
+              (r.status || 'Nuevo') === 'En espera de dueño',
+            'status-entregado': (r.status || 'Nuevo') === 'Entregado',
+            'status-rechazado': (r.status || 'Nuevo') === 'Rechazado'
+          }"
+        >
+          {{ r.status || 'Nuevo' }}
+        </span>
+      </div>
+    <p class="detalle-id">
+    Código de reporte:
+    <code>{{ r._id }}</code>
+    </p>
+
+      <p class="page-subtitle">
+        Detalle del reporte y, si aplica, registro de entrega al dueño.
+      </p>
+    </div>
+
+    <div class="detalle-layout">
+      <!-- Columna izquierda: info del reporte -->
+      <section class="card card-info">
+        <h3>Información del reporte</h3>
+
+        <p class="descripcion">
+          {{ r.description }}
+        </p>
+
+        <div class="info-grid">
+          <div>
+            <span class="label">Categoría</span>
+            <span class="value">{{ r.category | titlecase }}</span>
+          </div>
+          <div>
+            <span class="label">Lugar</span>
+            <span class="value">{{ r.location }}</span>
+          </div>
+          <div>
+            <span class="label">Fecha del evento</span>
+            <span class="value">
+              {{ r.date | date: 'shortDate' }}
+            </span>
+          </div>
+          <div>
+            <span class="label">Creado el</span>
+            <span class="value">
+              {{ r.createdAt | date: 'short' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="reporter-box">
+          <h4>Datos del reportante</h4>
+          <div class="info-grid reporter-grid">
+            <div>
+              <span class="label">Nombre</span>
+              <span class="value">{{ r.reporterName }}</span>
+            </div>
+            <div>
+              <span class="label">Correo</span>
+              <span class="value">{{ r.reporterEmail }}</span>
+            </div>
+            <div>
+              <span class="label">Teléfono</span>
+              <span class="value">{{ r.reporterPhone }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Columna derecha: entrega -->
+      <section class="card card-entrega">
+        <h3>Entrega del objeto</h3>
+
+        <!-- Si ya tiene entrega registrada -->
+        <div *ngIf="r.delivery?.deliveredTo; else entregaForm">
+          <p class="entrega-resumen">
+            Este reporte ya tiene una entrega registrada.
+          </p>
+
+          <div class="info-grid">
+            <div>
+              <span class="label">Entregado a</span>
+              <span class="value">{{ r.delivery?.deliveredTo }}</span>
+            </div>
+            <div *ngIf="r.delivery?.evidencePhotoUrl">
+              <span class="label">Foto de evidencia</span>
+              <a
+                class="value link-evidencia"
+                [href]="r.delivery?.evidencePhotoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver evidencia
+              </a>
+            </div>
+          </div>
+
+          <div *ngIf="r.delivery?.notes" class="notas-entrega">
+            <span class="label">Notas</span>
+            <p class="value">
+              {{ r.delivery?.notes }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Si NO tiene entrega registrada aún -->
+        <ng-template #entregaForm>
+          <p class="entrega-resumen">
+            Registra a quién se le entregó el objeto cuando se confirme el dueño.
+          </p>
+
+          <form [formGroup]="deliveryForm" (ngSubmit)="onRegistrarEntrega()">
+            <div class="form-group">
+              <label for="deliveredTo">Entregado a*</label>
+              <input
+                id="deliveredTo"
+                type="text"
+                formControlName="deliveredTo"
+                [class.invalid]="
+                  deliveryForm.get('deliveredTo')?.invalid &&
+                  deliveryForm.get('deliveredTo')?.touched
+                "
+              />
+              <div
+                class="field-error"
+                *ngIf="
+                  deliveryForm.get('deliveredTo')?.invalid &&
+                  deliveryForm.get('deliveredTo')?.touched
+                "
+              >
+                Este campo es obligatorio.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="evidencePhotoUrl">URL de foto de evidencia</label>
+              <input
+                id="evidencePhotoUrl"
+                type="url"
+                formControlName="evidencePhotoUrl"
+                placeholder="https://..."
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Notas</label>
+              <textarea
+                id="notes"
+                rows="3"
+                formControlName="notes"
+                placeholder="Comentarios adicionales sobre la entrega..."
+              ></textarea>
+            </div>
+
+            <button
+              class="btn-primary"
+              type="submit"
+              [disabled]="savingDelivery() || deliveryForm.invalid"
+            >
+              {{ savingDelivery() ? 'Guardando...' : 'Registrar entrega' }}
+            </button>
+          </form>
+        </ng-template>
+      </section>
+    </div>
+  </ng-container>
+</div>

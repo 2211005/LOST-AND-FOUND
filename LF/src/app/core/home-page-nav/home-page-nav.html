@@ -1,0 +1,33 @@
+<div class="nav-body">
+  <div class="nav-logo">
+    <a routerLink="">Lost and Found</a>
+  </div>
+
+  <div class="nav-actions">
+    <a class="nav-link" routerLink="/publicaciones">Publicaciones</a>
+
+    <a class="nav-button report-button" routerLink="/reports">
+      Hacer un reporte
+    </a>
+
+    <!-- Cuando NO está logueado -->
+    <a
+      class="nav-button login-button"
+      routerLink="admin/login"
+      *ngIf="!isLoggedIn"
+    >
+      Iniciar sesión
+    </a>
+
+    <!-- Cuando SÍ está logueado -->
+    <ng-container *ngIf="isLoggedIn">
+      <a class="nav-link" routerLink="/admin/reportes">
+        Panel admin
+      </a>
+
+      <button class="nav-button login-button" type="button" (click)="logout()">
+        Cerrar sesión
+      </button>
+    </ng-container>
+  </div>
+</div>

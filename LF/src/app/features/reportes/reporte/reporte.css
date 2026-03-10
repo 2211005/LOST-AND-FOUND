@@ -1,0 +1,4 @@
+.tabs { display:flex; gap:.5rem; margin:.5rem 0 1rem; }
+    .tabs button { padding:.55rem .85rem; border:1px solid #e5e7eb; border-radius:.5rem; background:#fff; cursor:pointer; }
+    .tabs button.active { border-color:#0ea5e9; box-shadow:0 0 0 2px rgba(14,165,233,.15); }
+    .panel { border:1px solid #e5e7eb; border-radius:.75rem; padding:1rem; background:#fff; }

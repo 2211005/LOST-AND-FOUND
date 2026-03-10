@@ -1,0 +1,366 @@
+/* ===== CONTENEDOR DE LA PÁGINA ===== */
+
+:host {
+  display: block;
+}
+
+/* Título y subtítulo ya tienen estilos base desde app.css,
+   aquí solo ajustamos márgenes para esta vista */
+.page-title {
+  margin-top: 0.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.page-subtitle {
+  margin-bottom: 0.9rem;
+}
+
+/* ===== BUSCADOR ===== */
+
+.pub-search {
+  margin-bottom: 0.8rem;
+}
+
+.pub-search input {
+  width: 100%;
+  max-width: 420px;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--lf-border);
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: var(--lf-text);
+  transition: border-color 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.pub-search input::placeholder {
+  color: var(--lf-text-muted);
+}
+
+.pub-search input:focus {
+  outline: none;
+  border-color: var(--lf-primary);
+  box-shadow: 0 0 0 2px var(--lf-primary-soft);
+}
+
+/* ===== MENSAJES ===== */
+
+.pub-error {
+  color: var(--lf-danger);
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+.pub-empty {
+  font-size: 0.9rem;
+  color: var(--lf-text-muted);
+  margin-top: 0.7rem;
+}
+
+/* ===== GRID DE CARDS ===== */
+
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.9rem;
+  margin-top: 0.6rem;
+}
+
+/* Cada publicación */
+.pub-card {
+  position: relative;
+  background: var(--lf-surface);
+  border-radius: 16px;
+  border: 1px solid var(--lf-border);
+  padding: 0.9rem 0.85rem 0.85rem;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.pub-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+  border-color: var(--lf-primary-soft);
+}
+
+/* Pill “ENTREGADO” */
+.pub-delivered-pill {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.4rem;
+  background: var(--lf-success);
+  color: #ecfdf5;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* Header de la card (tipo + categoría) */
+.pub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  padding-right: 3rem; /* dejar espacio para el pill "Entregado" */
+}
+
+/* Tipo perdido / encontrado */
+.pub-type {
+  font-size: 0.72rem;
+  padding: 0.12rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Colores según tipo */
+.pub-type.lost {
+  background: var(--lf-danger-soft);
+  color: var(--lf-danger);
+}
+
+.pub-type.found {
+  background: var(--lf-success-soft);
+  color: var(--lf-success);
+}
+
+/* Categoría */
+.pub-category {
+  font-size: 0.75rem;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  background: var(--lf-primary-soft);
+  color: var(--lf-primary);
+}
+
+/* Título / descripción */
+.pub-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0.1rem 0 0.1rem;
+  color: var(--lf-dark-soft);
+}
+
+.pub-description {
+  font-size: 0.87rem;
+  color: var(--lf-text-muted);
+  margin: 0;
+}
+
+/* Meta (lugar, fecha, estado) */
+.pub-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.25rem 0.7rem;
+  margin-top: 0.25rem;
+}
+
+.pub-meta .label {
+  font-size: 0.75rem;
+  color: var(--lf-text-muted);
+  display: block;
+}
+
+.pub-meta span:nth-child(2) {
+  font-size: 0.86rem;
+  color: var(--lf-text);
+}
+
+/* Estado */
+.pub-status {
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+/* Footer (reportante + botón admin) */
+.pub-footer {
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.pub-reporter .label {
+  font-size: 0.75rem;
+  color: var(--lf-text-muted);
+}
+
+.pub-reporter span:last-child {
+  font-size: 0.86rem;
+  color: var(--lf-text);
+}
+
+/* Botón "Ver detalle (admin)" */
+.pub-details-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.78rem;
+  background: var(--lf-dark-soft);
+  color: #f9fafb;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pub-details-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* ===== PAGINACIÓN ===== */
+
+.pub-pagination {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn {
+  border: 1px solid var(--lf-border);
+  background: #f9fafb;
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  min-width: 32px;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.page-btn.active {
+  background: var(--lf-primary);
+  color: #022c22;
+  border-color: var(--lf-primary);
+}
+
+.page-btn[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet / pantallas medianas */
+@media (max-width: 768px) {
+  .pub-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .pub-card {
+    border-radius: 14px;
+    padding: 0.85rem 0.8rem 0.8rem;
+  }
+
+  .pub-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Móvil chico (tipo iPhone / Samsung) */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.15rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.86rem;
+  }
+
+  .pub-search input {
+    max-width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .pub-grid {
+    grid-template-columns: 1fr; /* una columna en cel */
+    gap: 0.7rem;
+  }
+
+  .pub-card {
+    border-radius: 12px;
+    padding: 0.8rem 0.75rem 0.75rem;
+  }
+
+  .pub-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-details-btn {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.pub-footer {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pub-reporter .label {
+  font-size: 0.75rem;
+  color: var(--lf-text-muted);
+}
+
+.pub-reporter span:last-child {
+  font-size: 0.86rem;
+  color: var(--lf-text);
+}
+
+/* Botón "Ver detalle (admin)" */
+.pub-details-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.78rem;
+  background: var(--lf-dark-soft);
+  color: #f9fafb;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.pub-details-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* En móvil, que el botón se haga full-width si hace falta */
+@media (max-width: 480px) {
+  .pub-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-details-btn {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .pub-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-details-btn {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}

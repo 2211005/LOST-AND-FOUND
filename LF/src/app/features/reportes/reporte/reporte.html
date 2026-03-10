@@ -1,0 +1,11 @@
+<h2>Centro de Reportes</h2>
+
+<div class="tabs">
+  <button class="{{ vista === 'perdido' ? 'active' : '' }}" (click)="vista='perdido'">Objeto perdido</button>
+  <button class="{{ vista === 'encontrado' ? 'active' : '' }}" (click)="vista='encontrado'">Objeto encontrado</button>
+</div>
+
+<section class="panel">
+  <app-perdido-form *ngIf="vista==='perdido'"></app-perdido-form>
+  <app-encontrado-form *ngIf="vista==='encontrado'"></app-encontrado-form>
+</section>
