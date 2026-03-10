@@ -1,138 +1,268 @@
 # 🧳 Lost & Found – Sistema de Reporte de Objetos Perdidos
 
-Aplicación web diseñada para facilitar el reporte, registro y recuperación de objetos perdidos dentro de una organización o institución.  
-Permite a los usuarios reportar objetos extraviados o encontrados, subir imágenes, consultar estatus y mantener un flujo claro entre los responsables del sistema.
+![CI/CD](https://img.shields.io/badge/CI%2FCD-Configurado-blue)
+![Cobertura](https://img.shields.io/badge/Cobertura-Pendiente-lightgrey)
+![Licencia](https://img.shields.io/badge/Licencia-Por%20definir-lightgrey)
 
-Este proyecto fue desarrollado como parte del **Proyecto Integrador** de la materia *Desarrollo Web Integral*.
+---
+
+## 📚 Tabla de contenidos
+
+- [📌 Descripción del proyecto](#-descripción-del-proyecto)
+- [✨ Características principales](#-características-principales)
+- [🛠️ Stack tecnológico](#️-stack-tecnológico)
+- [✅ Requisitos previos](#-requisitos-previos)
+- [📦 Instalación](#-instalación)
+- [🚀 Ejecución local](#-ejecución-local)
+- [🧪 Pruebas](#-pruebas)
+- [📁 Estructura del proyecto](#-estructura-del-proyecto)
+- [🔐 Variables de entorno](#-variables-de-entorno)
+- [🤝 Contribución](#-contribución)
+- [📄 Licencia](#-licencia)
+- [👥 Autores](#-autores)
+
+---
+
+## 📌 Descripción del proyecto
+
+**Lost & Found** es una aplicación web diseñada para facilitar el **reporte, registro, consulta y recuperación de objetos perdidos** dentro de una organización o institución.
+
+El sistema permite que los usuarios reporten objetos perdidos o encontrados, adjunten imágenes, consulten el estado de sus reportes y mantengan un flujo claro de seguimiento entre los responsables del sistema.
+
+Este proyecto fue desarrollado como parte del **Proyecto Integrador** de la materia **Desarrollo Web Integral**.
 
 ---
 
 ## ✨ Características principales
 
-- 📝 **Registro de reportes** de objetos perdidos o encontrados.
-- 📸 **Subida de imágenes** asociadas al reporte.
-- 🔍 **Consulta de reportes** mediante API REST.
-- 🔐 **Autenticación segura con JWT**.
-- 🧩 **Separación clara de Frontend (Angular) y Backend (Node.js + Express)**.
-- 📦 **Contenerización con Docker**.
-- ☁️ **Preparado para despliegue en la nube**.
-- 🛡️ **Buenas prácticas de seguridad** (CORS, bcrypt, variables de entorno).
+- 📝 Registro de reportes de objetos perdidos o encontrados.
+- 📸 Subida de imágenes asociadas a cada reporte.
+- 🔍 Consulta de reportes mediante API REST.
+- 🔐 Autenticación segura mediante JWT.
+- 🧩 Separación clara entre frontend y backend.
+- 🛡️ Aplicación de buenas prácticas de seguridad.
+- ⚙️ Organización modular para facilitar mantenimiento y escalabilidad.
+- 🚦 Integración de flujo básico de automatización mediante GitHub Actions.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## 🛠️ Stack tecnológico
 
-### **Frontend**
-- Angular 17+
+### 🎨 Frontend
+- Angular
 - TypeScript
-- TailwindCSS / CSS
-- Servicios REST
+- HTML
+- CSS
 
-### **Backend**
+### ⚙️ Backend
 - Node.js
 - Express
-- MongoDB / Mongoose
-- JWT + bcrypt
-- Multer (para imágenes)
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- Multer
 
-### **DevOps**
-- Docker (por implementar a futuro)
-- Git / GitHub
+### 🔧 Herramientas de desarrollo
+- Git
+- GitHub
+- GitHub Actions
 - Postman
+- Visual Studio Code
+
+> **Nota:** Aunque Docker fue considerado en una etapa inicial del proyecto, **actualmente no se implementa dentro del repositorio**. En su lugar, se documenta el proceso de configuración y ejecución local del entorno de desarrollo.
 
 ---
 
-## 📁 Estructura del Proyecto
+## ✅ Requisitos previos
 
-### **Frontend (`LF_FRONT/`)**
+Antes de ejecutar el proyecto localmente, asegúrate de contar con lo siguiente:
 
+- [Node.js](https://nodejs.org/) 18 o superior
+- npm 9 o superior
+- Angular CLI instalado globalmente
+- MongoDB local o una cadena de conexión remota válida
+- Git instalado
+- Visual Studio Code u otro editor de código
 
-src/
-├── app/
-│ ├── components/
-│ ├── pages/
-│ ├── services/
-│ └── models/
-├── assets/
-└── environments/
+### Instalación de Angular CLI
 
-
-### **Backend (`LF_BACK/`)**
-
-
-src/
-├── controllers/
-├── models/
-├── routes/
-├── middleware/
-├── services/
-└── server.js
-
-
----
-
-## ⚙️ Instalación y ejecución
-
-### 🔹 **1. Clonar el repositorio**
 ```bash
-git clone https://github.com/tuUsuario/LostAndFound.git
-cd LostAndFound
+npm install -g @angular/cli
 
-🖥️ Backend
-🔹 2. Instalar dependencias
-cd LF_BACK
+### 📦 Instalación
+1. Clonar el repositorio
+git clone <URL_DEL_REPOSITORIO>
+cd LOST-AND-FOUND
+
+2. Instalar dependencias del frontend
+cd LF
 npm install
 
-🔹 3. Configurar variables de entorno
+3. Instalar dependencias del backend
+cd ../LF_BACK
+npm install
 
-Crear archivo .env:
+### 🚀 Ejecución local
 
+Para ejecutar el proyecto localmente, se recomienda abrir dos terminales: una para el frontend y otra para el backend.
+
+Frontend
+cd LF
+ng serve --open
+
+Por defecto, Angular suele ejecutarse en http://localhost:4200.
+
+Backend
+cd LF_BACK
+npm run dev
+
+El backend se ejecutará en el puerto configurado en el archivo .env.
+
+### 🧪 Pruebas
+
+Frontend
+Si el proyecto cuenta con pruebas configuradas en Angular, se pueden ejecutar con:
+
+cd LF
+ng test
+Backend
+
+Si el backend cuenta con scripts de prueba configurados, se pueden ejecutar con:
+
+cd LF_BACK
+npm test
+
+Nota: La cobertura automatizada y el esquema formal de pruebas aún se encuentran pendientes de definición o implementación completa dentro del proyecto.
+
+### 📁 Estructura del proyecto
+
+.
+├── .github
+│   └── workflows
+├── LF
+│   ├── .vscode
+│   ├── public
+│   └── src
+│       └── app
+│           ├── core
+│           │   ├── home-page-nav
+│           │   ├── interceptors
+│           │   └── not-found
+│           ├── features
+│           │   ├── admin
+│           │   │   ├── admin-login
+│           │   │   ├── reporte-detalle-admin
+│           │   │   └── reportes-admin
+│           │   ├── home-page
+│           │   └── reportes
+│           │       ├── encontrado-form
+│           │       ├── perdido-form
+│           │       ├── publicaciones
+│           │       ├── reporte
+│           │       └── reportes-home
+│           ├── home-page
+│           ├── reporte
+│           └── shared
+│               ├── guards
+│               ├── models
+│               └── services
+└── LF_BACK
+    └── src
+        ├── config
+        ├── controllers
+        ├── middleware
+        ├── models
+        ├── routes
+        ├── services
+        └── utils
+
+        Descripción general
+
+.github/workflows: contiene los archivos de GitHub Actions para automatización de procesos.
+
+LF/: contiene el frontend desarrollado con Angular.
+
+LF_BACK/: contiene el backend desarrollado con Node.js, Express y MongoDB.
+
+core/: módulos y componentes base del sistema.
+
+features/: módulos funcionales principales de la aplicación.
+
+shared/: recursos reutilizables como guards, modelos y servicios.
+
+### 🔐 Variables de entorno
+
+El backend requiere un archivo .env dentro de la carpeta LF_BACK/.
+
+Ejemplo de archivo .env
 PORT=3000
 MONGO_URI=tu_cadena_de_conexion
 JWT_SECRET=tu_secreto
 EMAIL_USER=correo@example.com
-EMAIL_PASS=contraseña
+EMAIL_PASS=tu_contraseña
+Descripción de variables
 
-🔹 4. Ejecutar servidor
-npm run dev
+PORT: puerto en el que se ejecutará el servidor backend.
 
-🌐 Frontend
-🔹 1. Instalar dependencias
-cd LF_FRONT
-npm install
+MONGO_URI: cadena de conexión a MongoDB.
 
-🔹 2. Ejecutar aplicación
-ng serve --open
+JWT_SECRET: clave secreta para firmar tokens JWT.
 
-📡 Endpoints principales (API REST)
-🔹 Reportes
-Método	Endpoint	Descripción
-GET	/api/reports	Obtener todos los reportes
-POST	/api/reports	Crear un nuevo reporte
-GET	/api/reports/:id	Obtener un reporte
-PUT	/api/reports/:id	Actualizar estado o datos
-DELETE	/api/reports/:id	Eliminar reporte
-🔹 Autenticación
-Método	Endpoint	Descripción
-POST	/api/auth/login	Iniciar sesión
-POST	/api/auth/register	Crear usuario
-🛡️ Seguridad implementada
+EMAIL_USER: correo utilizado para procesos relacionados con mensajería o notificaciones, si aplica.
 
-JWT para sesiones seguras.
+EMAIL_PASS: contraseña o clave de aplicación del correo configurado.
 
-bcrypt para hashing de contraseñas.
+Importante: El archivo .env no debe subirse al repositorio y debe incluirse en .gitignore.
 
-CORS configurado adecuadamente.
+### 🤝 Contribución
 
-Multer para validar imágenes.
+Para contribuir al proyecto, se recomienda seguir el siguiente flujo de trabajo:
 
-Variables de entorno para proteger datos sensibles.
+1. Cambiar a la rama de desarrollo
+git switch dev
+git pull origin dev
 
-Control de roles (administrador/usuario en futuras versiones).
+2. Crear una nueva rama de trabajo
+git switch -c feature/nombre-del-cambio
 
-🐳 Ejecución con Docker
-🔹 Build del contenedor
-docker build -t lostandfound-backend .
+3. Realizar cambios y registrar avances
+git add .
+git commit -m "Descripción clara del cambio realizado"
 
-🔹 Ejecutar
-docker run -p 3000:3000 lostandfound-backend
+4. Subir la rama al repositorio remoto
+git push -u origin feature/nombre-del-cambio
+
+5. Crear un Pull Request
+
+Desde GitHub:
+
+Seleccionar como rama base: dev
+
+Seleccionar como rama de comparación: feature/nombre-del-cambio
+
+Agregar un título y una descripción clara del cambio realizado
+
+Solicitar revisión si corresponde
+
+Recomendaciones
+
+No trabajar directamente sobre main
+
+Mantener actualizada la rama local con respecto a dev
+
+Usar mensajes de commit claros y descriptivos
+
+Verificar el funcionamiento del sistema antes de abrir un Pull Request
+
+### 👥 Autores
+
+Gerardo Alfonso Xix Cel
+
+Julian Patricio Turriza Mena
+
+Gabriel De Jesús Ramírez Canul
+
+Moisés Esteban Suárez Méndez
+
+Ericl Emmanuel Chay Colli
