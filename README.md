@@ -126,21 +126,141 @@ El backend se ejecutará en el puerto configurado en el archivo .env.
 
 ### 🧪 Pruebas
 
-Frontend
-Si el proyecto cuenta con pruebas configuradas en Angular, se pueden ejecutar con:
+El backend del proyecto incluye pruebas automatizadas de **integración** y **unitarias**, además de análisis estático con **ESLint**.
 
-cd LF
-ng test
-Backend
-
-Si el backend cuenta con scripts de prueba configurados, se pueden ejecutar con:
-
-cd LF_BACK
-npm test
-
-Nota: La cobertura automatizada y el esquema formal de pruebas aún se encuentran pendientes de definición o implementación completa dentro del proyecto.
+### Tecnologías utilizadas
+- **Jest**: framework principal de pruebas
+- **Supertest**: pruebas de integración para endpoints HTTP
+- **ESLint**: análisis estático de código
 
 ---
+
+## Requisitos previos
+
+Antes de ejecutar las pruebas, asegúrate de:
+
+- Tener instaladas las dependencias del backend
+- Estar ubicado dentro de la carpeta `LF_BACK`
+
+```bash
+cd LF_BACK
+npm install
+```
+
+## Estructura de pruebas
+
+Las pruebas están organizadas de la siguiente manera:
+
+tests/
+├── integration/
+│   └── health.test.js
+└── unit/
+    └── auth.controller.test.js
+
+health.test.js: pruebas de integración del endpoint GET /api/health
+auth.controller.test.js: pruebas unitarias de la función loginAdmin
+
+## Ejecutar todas las pruebas
+```bash
+npm.cmd test
+```
+Este comando ejecuta todas las suites configuradas en el proyecto.
+
+## Ejecutar pruebas con salida más detallada
+
+```bash
+npm.cmd test -- --verbose
+```
+Este comando muestra los casos de prueba de forma más desglosada en la terminal.
+
+## Ejecutar solo las pruebas unitarias
+
+```bash
+npm.cmd test -- tests/unit/auth.controller.test.js --verbose
+```
+
+## Ejecutar solo las pruebas de integración
+
+```bash
+npm.cmd test -- tests/integration/health.test.js --verbose
+```
+
+## Generar reporte de cobertura
+
+npm.cmd run test:coverage
+
+Este comando ejecuta las pruebas y genera un reporte de cobertura con métricas como:
+
+% Stmts
+% Branch
+% Funcs
+% Lines
+
+El reporte se genera en la carpeta:
+
+coverage/
+## Análisis estático con ESLint
+
+# Ejecutar análisis estático
+
+```bash
+npm.cmd run lint
+```
+
+Este comando revisa el código fuente del backend y reporta advertencias o errores de calidad y estilo.
+
+# Generar reporte HTML de ESLint
+
+```bash
+npm.cmd run lint:html
+```
+
+Este comando genera un archivo llamado:
+
+eslint-report.html
+
+que puede abrirse en el navegador para revisar los hallazgos de forma visual.
+
+# Corregir automáticamente problemas simples
+
+```bash
+npm.cmd run lint -- --fix
+```
+
+Este comando intenta corregir automáticamente observaciones simples, como problemas de formato.
+
+## Scripts disponibles
+
+Los scripts principales del backend son los siguientes:
+
+```bash
+"scripts": {
+  "test": "cross-env NODE_ENV=test jest --runInBand",
+  "test:watch": "cross-env NODE_ENV=test jest --watch",
+  "test:coverage": "cross-env NODE_ENV=test jest --coverage --runInBand",
+  "lint": "eslint src",
+  "lint:html": "eslint src -f html -o eslint-report.html",
+  "dev": "nodemon src/server.js",
+  "start": "node src/server.js"
+}
+```
+
+## Resumen rápido de comandos
+
+```bash
+Pruebas
+npm.cmd test
+npm.cmd test -- --verbose
+npm.cmd test -- tests/unit/auth.controller.test.js --verbose
+npm.cmd test -- tests/integration/health.test.js --verbose
+npm.cmd run test:coverage
+```
+```bash
+ESLint
+npm.cmd run lint
+npm.cmd run lint:html
+npm.cmd run lint -- --fix
+```
 
 ### 📁 Estructura del proyecto
 
