@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+  "test": "cross-env NODE_ENV=test jest --runInBand",
+  "test:watch": "cross-env NODE_ENV=test jest --watch",
+  "test:coverage": "cross-env NODE_ENV=test jest --coverage --runInBand",
+  "lint": "eslint src",
+  "lint:html": "eslint src -f html -o eslint-report.html",
+  "dev": "nodemon src/server.js",
+  "start": "node src/server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -20,6 +24,19 @@
     "nodemailer": "^7.0.10"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11"
+    "cross-env": "^10.1.0",
+    "eslint": "^10.1.0",
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.2.2"
+  },
+  "jest": {
+  "testEnvironment": "node",
+  "collectCoverageFrom": [
+    "src/controllers/**/*.js",
+    "src/routes/**/*.js",
+    "src/services/**/*.js",
+    "src/utils/**/*.js"
+    ]
   }
 }
