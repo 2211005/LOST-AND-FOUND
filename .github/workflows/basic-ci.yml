@@ -2,13 +2,18 @@ name: Basic CI
 
 on:
   push:
-    branches: [main, dev]
+    branches: [dev]
   pull_request:
-    branches: [main, dev]
+    branches: [dev, main]
 
 jobs:
-  validate:
+  backend-validation:
+    name: Backend lint and test
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: LF_BACK
 
     steps:
       - name: Checkout repository
@@ -18,9 +23,39 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: LF_BACK/package-lock.json
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
 
-      - name: Build project
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run backend tests
+        run: npm test
+
+  frontend-validation:
+    name: Frontend build validation
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: LF
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: LF/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Build frontend
         run: npm run build

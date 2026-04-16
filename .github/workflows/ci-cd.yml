@@ -1,18 +1,13 @@
-name: CI-CD
+name: CI-CD Main Pipeline
 
 on:
   push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   backend:
-    name: Backend tests
+    name: Backend lint, test and verification
     runs-on: ubuntu-latest
 
     defaults:
@@ -30,11 +25,17 @@ jobs:
           cache: npm
           cache-dependency-path: LF_BACK/package-lock.json
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
 
-      - name: Run tests
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run backend tests
         run: npm test
+
+      - name: Generate coverage report
+        run: npm run test:coverage
 
   frontend:
     name: Frontend build
@@ -55,8 +56,14 @@ jobs:
           cache: npm
           cache-dependency-path: LF/package-lock.json
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm install
 
       - name: Build frontend
         run: npm run build
+
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: LF/dist

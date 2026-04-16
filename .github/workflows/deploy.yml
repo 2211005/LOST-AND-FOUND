@@ -1,16 +1,39 @@
-name: Deploy
+name: Deploy Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
 
 jobs:
   deploy:
-    name: Fake deploy
+    name: Deploy to selected environment
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deployment placeholder
-        run: echo "Aquí irá el proceso de deploy"
+      - name: Show target environment
+        run: echo "Deploying to ${{ github.event.inputs.environment }}"
+
+      - name: Run staging deployment script
+        if: ${{ github.event.inputs.environment == 'staging' }}
+        shell: pwsh
+        run: ./scripts/deploy/deploy-staging.ps1
+
+      - name: Run production deployment script
+        if: ${{ github.event.inputs.environment == 'production' }}
+        shell: pwsh
+        run: ./scripts/deploy/deploy-production.ps1
+
+      - name: Run health check after deployment
+        shell: pwsh
+        run: ./scripts/tests/health-check.ps1
