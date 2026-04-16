@@ -38,7 +38,6 @@ jobs:
   frontend-validation:
     name: Frontend build validation
     runs-on: ubuntu-latest
-    continue-on-error: true  
 
     defaults:
       run:

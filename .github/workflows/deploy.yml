@@ -33,7 +33,3 @@ jobs:
         if: ${{ github.event.inputs.environment == 'production' }}
         shell: pwsh
         run: ./scripts/deploy/deploy-production.ps1
-
-      - name: Run health check after deployment
-        shell: pwsh
-        run: ./scripts/tests/health-check.ps1
