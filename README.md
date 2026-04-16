@@ -12,11 +12,15 @@
 - [✨ Características principales](#-características-principales)
 - [🛠️ Stack tecnológico](#️-stack-tecnológico)
 - [✅ Requisitos previos](#-requisitos-previos)
+- [📁 Estructura del proyecto](#-estructura-del-proyecto)
 - [📦 Instalación](#-instalación)
 - [🚀 Ejecución local](#-ejecución-local)
-- [🧪 Pruebas](#-pruebas)
-- [📁 Estructura del proyecto](#-estructura-del-proyecto)
+- [🧪 Pruebas y análisis estático](#-pruebas-y-análisis-estático)
+- [🔄 Pipeline CI/CD](#-pipeline-cicd)
+- [🚀 Despliegue](#-despliegue)
 - [🔐 Variables de entorno](#-variables-de-entorno)
+- [🧰 Scripts auxiliares del repositorio](#-scripts-auxiliares-del-repositorio)
+- [📸 Evidencia del pipeline](#-evidencia-del-pipeline)
 - [🤝 Contribución](#-contribución)
 - [📄 Licencia](#-licencia)
 - [👥 Autores](#-autores)
@@ -85,46 +89,115 @@ Antes de ejecutar el proyecto localmente, asegúrate de contar con lo siguiente:
 - Git instalado
 - Visual Studio Code u otro editor de código
 
-### Instalación de Angular CLI
+---
 
-npm install -g @angular/cli
+## 📁 Estructura del proyecto
+
+```text
+├── .github
+│   └── workflows
+├── LF
+│   ├── .vscode
+│   ├── public
+│   └── src
+│       └── app
+│           ├── core
+│           │   ├── home-page-nav
+│           │   ├── interceptors
+│           │   └── not-found
+│           ├── features
+│           │   ├── admin
+│           │   │   ├── admin-login
+│           │   │   ├── reporte-detalle-admin
+│           │   │   └── reportes-admin
+│           │   ├── home-page
+│           │   └── reportes
+│           │       ├── encontrado-form
+│           │       ├── perdido-form
+│           │       ├── publicaciones
+│           │       ├── reporte
+│           │       └── reportes-home
+│           ├── home-page
+│           ├── reporte
+│           └── shared
+│               ├── guards
+│               ├── models
+│               └── services
+└── LF_BACK
+    └── src
+        ├── config
+        ├── controllers
+        ├── middleware
+        ├── models
+        ├── routes
+        ├── services
+        └── utils     
+```   
+### Descripción general
+
+.github/workflows: contiene los archivos de GitHub Actions para automatización de procesos.
+
+LF/: contiene el frontend desarrollado con Angular.
+
+LF_BACK/: contiene el backend desarrollado con Node.js, Express y MongoDB.
+
+core/: módulos y componentes base del sistema.
+
+features/: módulos funcionales principales de la aplicación.
+
+shared/: recursos reutilizables como guards, modelos y servicios.
 
 ---
 
-### 📦 Instalación
-1. Clonar el repositorio
+## 📦 Instalación
+
+1. Instalación de Angular CLI
+
+```bash
+npm install -g @angular/cli
+```
+
+2. Clonar el repositorio
+```bash
 git clone <URL_DEL_REPOSITORIO>
 cd LOST-AND-FOUND
-
-2. Instalar dependencias del frontend
+```
+3. Instalar dependencias del frontend
+```bash
 cd LF
 npm install
+```
 
-3. Instalar dependencias del backend
+4. Instalar dependencias del backend
+```bash
 cd ../LF_BACK
 npm install
-
+```
 ---
 
-### 🚀 Ejecución local
+## 🚀 Ejecución local
 
 Para ejecutar el proyecto localmente, se recomienda abrir dos terminales: una para el frontend y otra para el backend.
 
-Frontend
+### Frontend
+```bash
 cd LF
 ng serve --open
+```
 
 Por defecto, Angular suele ejecutarse en http://localhost:4200.
 
-Backend
+### Backend
+```bash
 cd LF_BACK
 npm run dev
+```
 
 El backend se ejecutará en el puerto configurado en el archivo .env.
 
 ---
 
-### 🧪 Pruebas
+## 🧪 Pruebas y análisis estático
 
 El backend del proyecto incluye pruebas automatizadas de **integración** y **unitarias**, además de análisis estático con **ESLint**.
 
@@ -135,7 +208,7 @@ El backend del proyecto incluye pruebas automatizadas de **integración** y **un
 
 ---
 
-## Requisitos previos
+### Requisitos previos
 
 Antes de ejecutar las pruebas, asegúrate de:
 
@@ -147,45 +220,47 @@ cd LF_BACK
 npm install
 ```
 
-## Estructura de pruebas
+### Estructura de pruebas
 
 Las pruebas están organizadas de la siguiente manera:
 
+```text
 tests/
 ├── integration/
 │   └── health.test.js
 └── unit/
     └── auth.controller.test.js
+```
 
 health.test.js: pruebas de integración del endpoint GET /api/health
 auth.controller.test.js: pruebas unitarias de la función loginAdmin
 
-## Ejecutar todas las pruebas
+### Ejecutar todas las pruebas
 ```bash
 npm.cmd test
 ```
 Este comando ejecuta todas las suites configuradas en el proyecto.
 
-## Ejecutar pruebas con salida más detallada
+### Ejecutar pruebas con salida más detallada
 
 ```bash
 npm.cmd test -- --verbose
 ```
 Este comando muestra los casos de prueba de forma más desglosada en la terminal.
 
-## Ejecutar solo las pruebas unitarias
+### Ejecutar solo las pruebas unitarias
 
 ```bash
 npm.cmd test -- tests/unit/auth.controller.test.js --verbose
 ```
 
-## Ejecutar solo las pruebas de integración
+### Ejecutar solo las pruebas de integración
 
 ```bash
 npm.cmd test -- tests/integration/health.test.js --verbose
 ```
 
-## Generar reporte de cobertura
+### Generar reporte de cobertura
 
 npm.cmd run test:coverage
 
@@ -196,10 +271,8 @@ Este comando ejecuta las pruebas y genera un reporte de cobertura con métricas 
 % Funcs
 % Lines
 
-El reporte se genera en la carpeta:
-
-coverage/
-## Análisis estático con ESLint
+El reporte se genera en la carpeta: **coverage/**
+### Análisis estático con ESLint
 
 # Ejecutar análisis estático
 
@@ -215,10 +288,7 @@ Este comando revisa el código fuente del backend y reporta advertencias o error
 npm.cmd run lint:html
 ```
 
-Este comando genera un archivo llamado:
-
-eslint-report.html
-
+Este comando genera un archivo llamado: **eslint-report.html**
 que puede abrirse en el navegador para revisar los hallazgos de forma visual.
 
 # Corregir automáticamente problemas simples
@@ -262,65 +332,94 @@ npm.cmd run lint:html
 npm.cmd run lint -- --fix
 ```
 
-### 📁 Estructura del proyecto
+### 🔄 Pipeline CI/CD
 
-.
-├── .github
-│   └── workflows
-├── LF
-│   ├── .vscode
-│   ├── public
-│   └── src
-│       └── app
-│           ├── core
-│           │   ├── home-page-nav
-│           │   ├── interceptors
-│           │   └── not-found
-│           ├── features
-│           │   ├── admin
-│           │   │   ├── admin-login
-│           │   │   ├── reporte-detalle-admin
-│           │   │   └── reportes-admin
-│           │   ├── home-page
-│           │   └── reportes
-│           │       ├── encontrado-form
-│           │       ├── perdido-form
-│           │       ├── publicaciones
-│           │       ├── reporte
-│           │       └── reportes-home
-│           ├── home-page
-│           ├── reporte
-│           └── shared
-│               ├── guards
-│               ├── models
-│               └── services
-└── LF_BACK
-    └── src
-        ├── config
-        ├── controllers
-        ├── middleware
-        ├── models
-        ├── routes
-        ├── services
-        └── utils
+El proyecto cuenta con **GitHub Actions** para automatizar validaciones y flujo principal de integración continua.
 
-        Descripción general
+### Workflows configurados
 
-.github/workflows: contiene los archivos de GitHub Actions para automatización de procesos.
+#### 1. `basic-ci.yml`
+Workflow de validación básica para rama `dev` y pull requests.
 
-LF/: contiene el frontend desarrollado con Angular.
+Incluye:
+- instalación de dependencias del backend
+- ejecución de ESLint
+- ejecución de pruebas automatizadas del backend
+- build del frontend
 
-LF_BACK/: contiene el backend desarrollado con Node.js, Express y MongoDB.
+#### 2. `ci-cd.yml`
+Pipeline principal sobre `main`.
 
-core/: módulos y componentes base del sistema.
+Incluye:
+- lint del backend
+- pruebas del backend
+- generación de cobertura
+- build del frontend
+- publicación de artefacto del frontend
 
-features/: módulos funcionales principales de la aplicación.
+#### 3. `deploy.yml`
+Workflow manual de despliegue con `workflow_dispatch`.
 
-shared/: recursos reutilizables como guards, modelos y servicios.
+Permite seleccionar:
+- `staging`
+- `production`
 
----
+y ejecuta los scripts de despliegue correspondientes.
 
-### 🔐 Variables de entorno
+### Cómo visualizar el pipeline
+
+1. Ir a la pestaña **Actions** del repositorio en GitHub.
+2. Seleccionar el workflow deseado:
+   - `Basic CI`
+   - `CI-CD Main Pipeline`
+   - `Deploy Workflow`
+3. Abrir una ejecución para revisar:
+   - jobs ejecutados
+   - duración
+   - estado
+   - logs por paso
+
+> El pipeline no se reproduce localmente con Docker, ya que actualmente el proyecto no utiliza contenedores dentro del repositorio.
+
+## 🚀 Despliegue
+
+El despliegue actual del proyecto se encuentra modelado mediante:
+
+- workflows de GitHub Actions
+- scripts de despliegue en `scripts/deploy`
+- flujo manual por entorno
+
+### Ejecutar workflow de despliegue manual
+
+Desde GitHub:
+
+1. Entrar a la pestaña **Actions**
+2. Seleccionar **Deploy Workflow**
+3. Presionar **Run workflow**
+4. Elegir el entorno:
+   - `staging`
+   - `production`
+
+### Scripts de despliegue disponibles
+
+```text
+scripts/deploy/
+├── deploy-staging.ps1
+├── deploy-production.ps1
+└── rollback.ps1
+```
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy\deploy-staging.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy\deploy-production.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy\rollback.ps1
+```
+
+*Importante*
+
+En esta etapa del proyecto, el despliegue se encuentra implementado como flujo asistido/documentado, orientado a demostrar la preparación del repositorio para liberación y despliegue continuo. La automatización ya contempla el pipeline y los scripts necesarios para integrarse posteriormente con una plataforma de hosting o entorno productivo real.
+
+## 🔐 Variables de entorno
 
 El backend requiere un archivo .env dentro de la carpeta LF_BACK/.
 
@@ -346,7 +445,44 @@ Importante: El archivo .env no debe subirse al repositorio y debe incluirse en .
 
 ---
 
-### 🤝 Contribución
+## 🧰 Scripts auxiliares del repositorio
+
+Estos scripts apoyan la preparación del entorno de liberación y permiten validar rápidamente el estado operativo del proyecto.
+
+### **Verificación del entorno**
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\verify-env.ps1
+```
+Health check
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\health-check.ps1
+Smoke test
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\smoke-test.ps1
+Integration test
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\integration-test.ps1
+Deploy a staging
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy\deploy-staging.ps1
+Deploy a producción
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy\deploy-production.ps1
+Rollback
+powershell -ExecutionPolicy Bypass -File .\scripts\deploy\rollback.ps1
+
+---
+
+## 📸 Evidencia del pipeline
+
+### Basic CI exitoso
+![Basic CI exitoso](docs/capturas/Basic%20CI%20Pipelien.png)
+
+### CI-CD Main Pipeline exitoso
+![CI-CD Main Pipeline exitoso](docs/capturas/CI-CD%20Pipeline.png)
+
+### Deploy Workflow exitoso
+![Deploy Workflow exitoso](docs/capturas/Deploy%20Workflow.png)
+
+---
+
+## 🤝 Contribución
 
 Para contribuir al proyecto, se recomienda seguir el siguiente flujo de trabajo:
 
@@ -388,7 +524,7 @@ Verificar el funcionamiento del sistema antes de abrir un Pull Request
 
 ---
 
-### 📄 Licencia
+## 📄 Licencia
 
 La licencia del proyecto se encuentra pendiente de definición.
 
@@ -396,7 +532,7 @@ Este apartado deberá actualizarse una vez que el equipo determine la licencia o
 
 ---
 
-### 👥 Autores
+## 👥 Autores
 
 Gerardo Alfonso Xix Cel
 
