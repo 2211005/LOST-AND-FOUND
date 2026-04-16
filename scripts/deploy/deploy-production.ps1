@@ -1,7 +1,10 @@
-Write-Host "Despliegue a producción iniciado..."
-Write-Host "1. Validar merge a main"
-Write-Host "2. Ejecutar pipeline de producción"
-Write-Host "3. Confirmar despliegue en frontend y backend"
-Write-Host "4. Ejecutar health check post-despliegue"
-Write-Host "Despliegue a producción finalizado."
+Write-Host "Despliegue a produccion iniciado..."
+
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\verify-env.ps1
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\health-check.ps1
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+Write-Host "Despliegue a produccion validado correctamente."
 exit 0

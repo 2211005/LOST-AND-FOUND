@@ -94,44 +94,54 @@ Antes de ejecutar el proyecto localmente, asegúrate de contar con lo siguiente:
 ## 📁 Estructura del proyecto
 
 ```text
-├── .github
-│   └── workflows
-├── LF
-│   ├── .vscode
-│   ├── public
-│   └── src
-│       └── app
-│           ├── core
-│           │   ├── home-page-nav
-│           │   ├── interceptors
-│           │   └── not-found
-│           ├── features
-│           │   ├── admin
-│           │   │   ├── admin-login
-│           │   │   ├── reporte-detalle-admin
-│           │   │   └── reportes-admin
-│           │   ├── home-page
-│           │   └── reportes
-│           │       ├── encontrado-form
-│           │       ├── perdido-form
-│           │       ├── publicaciones
-│           │       ├── reporte
-│           │       └── reportes-home
-│           ├── home-page
-│           ├── reporte
-│           └── shared
-│               ├── guards
-│               ├── models
-│               └── services
-└── LF_BACK
-    └── src
-        ├── config
-        ├── controllers
-        ├── middleware
-        ├── models
-        ├── routes
-        ├── services
-        └── utils     
+LOST-AND-FOUND
+├── .github/
+│   └── workflows/
+│       ├── basic-ci.yml
+│       ├── ci-cd.yml
+│       └── deploy.yml
+├── docs/
+│   └── capturas/
+├── infra/
+├── LF/
+│   ├── src/
+│   ├── public/
+│   ├── .angular/           (cache de Angular)
+│   ├── dist/               (build generado)
+│   ├── package.json
+│   ├── angular.json
+│   └── proxy.conf.json
+├── LF_BACK/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── tests/
+│   │   ├── integration/
+│   │   └── unit/
+│   ├── package.json
+│   └── .env
+├── scripts/
+│   ├── deploy/
+│   │   ├── deploy-staging.ps1
+│   │   ├── deploy-production.ps1
+│   │   └── rollback.ps1
+│   └── tests/
+│       ├── verify-env.ps1
+│       ├── health-check.ps1
+│       ├── smoke-test.ps1
+│       └── integration-test.ps1
+├── .env.example
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
+├── package.json
+├── package-lock.json
+└── README.md  
 ```   
 ### Descripción general
 
@@ -455,17 +465,34 @@ Estos scripts apoyan la preparación del entorno de liberación y permiten valid
 powershell -ExecutionPolicy Bypass -File .\scripts\tests\verify-env.ps1
 ```
 Health check
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\tests\health-check.ps1
+```
+
 Smoke test
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\tests\smoke-test.ps1
+```
+
 Integration test
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\tests\integration-test.ps1
+```
+
 Deploy a staging
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\deploy\deploy-staging.ps1
+```
+
 Deploy a producción
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\deploy\deploy-production.ps1
+```
+
 Rollback
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\deploy\rollback.ps1
+```
 
 ---
 

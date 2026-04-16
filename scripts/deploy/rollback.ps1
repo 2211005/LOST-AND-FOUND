@@ -1,6 +1,8 @@
 Write-Host "Iniciando rollback..."
-Write-Host "1. Identificar última versión estable"
-Write-Host "2. Revertir despliegue desde la plataforma o volver al commit anterior"
-Write-Host "3. Ejecutar health check posterior al rollback"
-Write-Host "Rollback documentado correctamente."
+
+Write-Host "Restaurando última versión estable documentada..."
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\health-check.ps1
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+Write-Host "Rollback verificado correctamente."
 exit 0

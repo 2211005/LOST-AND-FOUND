@@ -1,7 +1,13 @@
 Write-Host "Despliegue a staging iniciado..."
-Write-Host "1. Validar rama dev o staging"
-Write-Host "2. Ejecutar lint y pruebas"
-Write-Host "3. Hacer push al repositorio conectado con el servicio"
-Write-Host "4. Verificar despliegue en plataforma"
-Write-Host "Despliegue a staging finalizado."
+
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\verify-env.ps1
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\integration-test.ps1
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+powershell -ExecutionPolicy Bypass -File .\scripts\tests\smoke-test.ps1
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+Write-Host "Despliegue a staging validado correctamente."
 exit 0
