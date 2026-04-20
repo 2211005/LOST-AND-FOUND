@@ -346,7 +346,7 @@ npm.cmd run lint -- --fix
 
 El proyecto cuenta con **GitHub Actions** para automatizar validaciones y flujo principal de integración continua.
 
-### Workflows configurados
+### Workflows configuradoss
 
 #### 1. `basic-ci.yml`
 Workflow de validación básica para rama `dev` y pull requests.
