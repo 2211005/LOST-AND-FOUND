@@ -6,7 +6,7 @@
 
 ---
 
-## 📚 Tabla de contenidoss
+## 📚 Tabla de contenidosss
 
 - [📌 Descripción del proyecto](#-descripción-del-proyecto)
 - [✨ Características principales](#-características-principales)
